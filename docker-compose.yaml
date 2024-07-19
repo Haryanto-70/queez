@@ -23,3 +23,6 @@ services:
       POSTGRES_PORT: 5432
 
   # docker compose up -d
+  # 1QVsN91oyOejlg0G  supabase  queez
+  # anom   eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZlam1yZ2p4ZmVobG96anp4anZqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjEzOTgzMzIsImV4cCI6MjAzNjk3NDMzMn0.F-PfRi0Umoe2o8AyFezZsluk-AcmtE8UWMFsNjKpj1U
+  # project url :  https://vejmrgjxfehlozjzxjvj.supabase.co
