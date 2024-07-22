@@ -1,7 +1,8 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head } from "@inertiajs/vue3";
-import { ref, onUnmounted, onMounted, watch } from "vue";
+import { Head, router } from "@inertiajs/vue3";
+import { ref, onUnmounted, onMounted } from "vue";
+import CardButton from "../Components/CardButton.vue";
 
 axios.defaults.baseURL = "http://127.0.0.1:8000/";
 const header = ref("Hallo");
@@ -15,32 +16,43 @@ onMounted(() => {
 });
 
 const getResponse = async () => {
-    const responses = await axios.get("users ");
-    // users.value = responses.data;
-    console.log("tabel users", users);
+    try {
+        const responses = await axios.get("users ");
+        users.value = responses.data;
+        console.log("interval 2 s");
+        header.value = "READ DATABASE";
+        count.value = count.value + 1;
+    } catch (error) {
+        header.value = "ERROR READ DATABASE";
+    }
 };
 
-setInterval(() => {
+const interval2Sec = setInterval(() => {
     if (header.value == "Hallo") {
-        count.value = count.value + 1;
-        header.value = "READ DATABASE";
         getResponse();
     } else {
         header.value = "Hallo";
     }
 }, 2000);
 
-setInterval(() => {
+const interval1Sec = setInterval(() => {
     if (header2.value == "Hallo-2") {
         header2.value = "THIS IS DASBOARD 2";
+        console.log("interval 1 s");
     } else {
         header2.value = "Hallo-2";
     }
 }, 1000);
 
 onUnmounted(() => {
-    clearInterval();
+    clearInterval(interval2Sec);
+    clearInterval(interval1Sec);
+    console.log("on Unmounted");
 });
+
+function onDisplay() {
+    router.get("/display");
+}
 </script>
 
 <template>
@@ -63,6 +75,29 @@ onUnmounted(() => {
                 >
                     <div class="p-6 text-gray-900 dark:text-gray-100">
                         You're logged in!
+                    </div>
+                    <div class="flex flex-row justify-around">
+                        <CardButton
+                            buttonName="DESK COUNTER 01"
+                            class="bg-[#FF4C4C]"
+                        />
+                        <CardButton
+                            buttonName="DESK COUNTER 02"
+                            class="bg-[#5de586]"
+                        />
+                        <CardButton
+                            buttonName="DESK COUNTER 03"
+                            class="bg-[#c7d547]"
+                        />
+                        <CardButton
+                            buttonName="DESK COUNTER 04"
+                            class="bg-[#2badd8]"
+                        />
+                        <CardButton
+                            @click="onDisplay"
+                            buttonName="DISPLAY QUEUE"
+                            class="bg-[#4256d7]"
+                        />
                     </div>
                     <table class="table">
                         <thead>

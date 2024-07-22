@@ -19,31 +19,43 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Haryanto',
                 'email' => 'hary7072@gmail.com',
+                'role' => 'admin',
                 'password' => bcrypt('bakti123'),
 
             ],
             [
-                'name' => 'Admin User',
+                'name' => 'Dashboard Display',
                 'email' => 'admin@gmail.com',
+                'role' => 'dsiplay',
                 'password' => bcrypt('bakti123'),
 
             ],
             [
-                'name' => 'Technician User',
-                'email' => 'tech@gmail.com',
+                'name' => 'Customer Service 1',
+                'email' => 'cs1@gmail.com',
+                'role' => 'cs',
                 'password' => bcrypt('bakti123'),
 
 
             ],
             [
-                'name' => 'Admin User 2',
-                'email' => 'admin2@gmail.com',
+                'name' => 'Customer Service 2',
+                'email' => 'cs2@gmail.com',
+                'role' => 'cs',
                 'password' => bcrypt('bakti123'),
 
             ],
             [
-                'name' => 'Technician User 2',
-                'email' => 'tech2@gmail.com',
+                'name' => 'Customer Admin 1',
+                'email' => 'ca1@gmail.com',
+                'role' => 'ca',
+                'password' => bcrypt('bakti123'),
+
+            ],
+            [
+                'name' => 'Customer Admin 2',
+                'email' => 'ca2@gmail.com',
+                'role' => 'ca',
                 'password' => bcrypt('bakti123'),
 
             ],
