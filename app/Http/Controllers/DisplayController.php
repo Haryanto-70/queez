@@ -21,4 +21,10 @@ class DisplayController extends Controller
 
         return Inertia::render('Display/Display');
     }
+
+    public function dispenser(): Response
+    {
+
+        return Inertia::render('Ticket/Dispenser');
+    }
 }

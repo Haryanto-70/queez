@@ -53,6 +53,13 @@ onUnmounted(() => {
 function onDisplay() {
     router.get("/display");
 }
+
+function deskCounter(cNo) {
+    router.get("/desk/" + cNo);
+}
+function tokenDispenser() {
+    router.get("/dispenser");
+}
 </script>
 
 <template>
@@ -76,20 +83,24 @@ function onDisplay() {
                     <div class="p-6 text-gray-900 dark:text-gray-100">
                         You're logged in!
                     </div>
-                    <div class="flex flex-row justify-around">
+                    <div class="flex flex-wrap justify-around">
                         <CardButton
+                            @click="deskCounter(1)"
                             buttonName="DESK COUNTER 01"
                             class="bg-[#FF4C4C]"
                         />
                         <CardButton
+                            @click="deskCounter(2)"
                             buttonName="DESK COUNTER 02"
                             class="bg-[#5de586]"
                         />
                         <CardButton
+                            @click="deskCounter(3)"
                             buttonName="DESK COUNTER 03"
                             class="bg-[#c7d547]"
                         />
                         <CardButton
+                            @click="deskCounter(4)"
                             buttonName="DESK COUNTER 04"
                             class="bg-[#2badd8]"
                         />
@@ -98,8 +109,13 @@ function onDisplay() {
                             buttonName="DISPLAY QUEUE"
                             class="bg-[#4256d7]"
                         />
+                        <CardButton
+                            @click="tokenDispenser"
+                            buttonName="TOKEN DISPENSER"
+                            class="bg-[#4256d7]"
+                        />
                     </div>
-                    <table class="table">
+                    <!-- <table class="table">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -136,7 +152,7 @@ function onDisplay() {
                                 </td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table> -->
                 </div>
             </div>
         </div>

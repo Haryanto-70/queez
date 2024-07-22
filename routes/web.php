@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DisplayController;
+use App\Http\Controllers\DeskController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -33,6 +34,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/users', [ProfileController::class, 'users'])->name('profile.users');
 
     Route::get('/display', [DisplayController::class, 'display'])->name('display');
+
+    Route::get('/desk/{dNo}', [DeskController::class, 'desk'])->name('desk');
+    Route::get('/userdesk', [DeskController::class, 'userdesk'])->name('userdesk');
+
+    Route::get('/dispenser', [DisplayController::class, 'dispenser'])->name('dispenser');
 });
 
 require __DIR__ . '/auth.php';
