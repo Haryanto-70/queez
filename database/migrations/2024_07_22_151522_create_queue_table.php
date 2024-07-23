@@ -13,6 +13,23 @@ return new class extends Migration
     {
         Schema::create('queue', function (Blueprint $table) {
             $table->id();
+            $table->string('service_type');
+            /** A B C D */
+            $table->bigInteger('queue_id')->nullable();
+            /** 001 002 003 dst reset per hari */
+            $table->string('queue_no')->nullable();
+            /** A001 B001 dst */
+            $table->string('status')->default('new');
+            /** new called inservice pending finish */
+            $table->time('started_at')->nullable();
+            /** inservice started  */
+            $table->time('finished_at')->nullable();
+            /** inservice finished */
+            $table->time('pending_at')->nullable();
+            /**pending started */
+            $table->time('resume_at')->nullable();
+            /** pending finished  calculate duration   */
+            $table->bigInteger('duration')->nullable();
             $table->timestamps();
         });
     }

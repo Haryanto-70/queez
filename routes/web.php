@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/userdesk', [DeskController::class, 'userdesk'])->name('userdesk');
 
     Route::get('/dispenser', [DisplayController::class, 'dispenser'])->name('dispenser');
+    Route::put('/queue/{sId}', [DisplayController::class, 'queue'])->name('queue');
 });
 
 require __DIR__ . '/auth.php';
