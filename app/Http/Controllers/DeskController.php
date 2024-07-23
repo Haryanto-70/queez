@@ -56,4 +56,19 @@ class DeskController extends Controller
 
         return response()->json($data);
     }
+
+    public function queuelist(Request $request)
+    {
+        $uid = Auth::user()->id;
+        $type = request('type');
+        // dd($type);
+        $data = DB::table('queue')
+            ->where('status', 'new')
+            ->orderBy('service_type')
+            ->orderBy('created_at')
+            ->select('*')
+            ->get();
+
+        return response()->json($data);
+    }
 }
