@@ -14,7 +14,7 @@ const datas = ref([]);
 const time = ref();
 const callReady = ref(true);
 const namapt = ref("PT. BANK RAKYAT INDONESIA");
-const inCounter1 = ref("A001");
+const inCounter1 = ref("C001");
 const inCounter2 = ref("A002");
 const inCounter3 = ref("A003");
 const inCounter4 = ref("B001");
@@ -56,9 +56,9 @@ const toggle = ref(true);
 
 onMounted(() => {
     getResponse();
-    getAdvs();
-    getQueue();
-    getTime();
+    // getAdvs();
+    // getQueue();
+    // getTime();
 });
 
 const getResponse = async () => {
@@ -132,7 +132,7 @@ const getAdvs = setInterval(() => {
 onUnmounted(() => {
     clearInterval(getQueue);
     clearInterval(getTime);
-    clearInterval(getAds);
+    clearInterval(getAdvs);
     console.log("on Unmounted");
 });
 
@@ -142,9 +142,196 @@ function onDisplay() {
 
 function callQueue() {
     let count = 0;
+    let queue = inCounter1.value;
+    const char1 = queue[0];
+    const char2 = queue[1];
+    const char3 = queue[2];
+    const char4 = queue[3];
+
+    console.log(char1, char2, char3, char4);
     const callSound1 = soundAttention;
     const callSound2 = soundQueNo;
-    const callSound6 = soundToCounter;
+    let callSound3 = sound_A;
+    let callSound4 = sound_0;
+    let callSound5 = sound_1;
+    let callSound6 = sound_2;
+    const callSound7 = soundToCounter;
+    const callSound8 = sound_1;
+    const callSound9 = soundAttention;
+
+    switch (char1) {
+        case "A":
+            callSound3 = sound_A;
+            break;
+        case "B":
+            callSound3 = sound_B;
+            break;
+        case "C":
+            callSound3 = sound_C;
+            break;
+        case "D":
+            callSound3 = sound_D;
+            break;
+
+        default:
+            callSound3 = sound_D;
+            break;
+    }
+
+    console.log("char 2 ", char2);
+    switch (char2) {
+        case "0":
+            callSound4 = sound_0;
+            break;
+        case "1":
+            callSound4 = sound_1;
+            break;
+        case "2":
+            callSound4 = sound_2;
+            break;
+        case "3":
+            callSound4 = sound_3;
+            break;
+        case "4":
+            callSound4 = sound_4;
+            break;
+        case "5":
+            callSound4 = sound_5;
+            break;
+        case "6":
+            callSound4 = sound_6;
+            break;
+        case "7":
+            callSound4 = sound_7;
+            break;
+        case "8":
+            callSound4 = sound_8;
+            break;
+        case "9":
+            callSound4 = sound_9;
+            break;
+
+        default:
+            callSound4 = sound_9;
+            break;
+    }
+
+    console.log("char 3 ", char3);
+
+    switch (char3) {
+        case "0":
+            callSound5 = sound_0;
+            break;
+        case "1":
+            callSound5 = sound_1;
+            break;
+        case "2":
+            callSound5 = sound_2;
+            break;
+        case "3":
+            callSound5 = sound_3;
+            break;
+        case "4":
+            callSound5 = sound_4;
+            break;
+        case "5":
+            callSound5 = sound_5;
+            break;
+        case "6":
+            callSound5 = sound_6;
+            break;
+        case "7":
+            callSound5 = sound_7;
+            break;
+        case "8":
+            callSound5 = sound_8;
+            break;
+        case "9":
+            callSound5 = sound_9;
+            break;
+
+        default:
+            callSound5 = sound_9;
+            break;
+    }
+
+    console.log("char 4 ", char4);
+
+    switch (char4) {
+        case "0":
+            callSound6 = sound_0;
+            break;
+        case "1":
+            callSound6 = sound_1;
+            break;
+        case "2":
+            callSound6 = sound_2;
+            break;
+        case "3":
+            callSound6 = sound_3;
+            break;
+        case "4":
+            callSound6 = sound_4;
+            break;
+        case "5":
+            callSound6 = sound_5;
+            break;
+        case "6":
+            callSound6 = sound_6;
+            break;
+        case "7":
+            callSound6 = sound_7;
+            break;
+        case "8":
+            callSound6 = sound_8;
+            break;
+        case "9":
+            callSound6 = sound_9;
+            break;
+
+        default:
+            callSound6 = sound_9;
+            break;
+    }
+
+    // console.log("char 4 ", char4);
+    // switch (char4) {
+    //     case 0:
+    //         callSound6 = sound_0;
+    //         break;
+    //     case 1:
+    //         callSound6 = sound_1;
+    //         break;
+    //     case 2:
+    //         callSound6 = sound_2;
+    //         break;
+    //     case 3:
+    //         callSound6 = sound_3;
+    //         break;
+    //     case 4:
+    //         callSound6 = sound_4;
+    //         break;
+    //     case 5:
+    //         callSound6 = sound_5;
+    //         break;
+    //     case 6:
+    //         callSound6 = sound_6;
+    //         break;
+    //     case 7:
+    //         callSound6 = sound_7;
+    //         break;
+    //     case 8:
+    //         callSound6 = sound_8;
+    //         break;
+    //     case 9:
+    //         callSound6 = sound_9;
+    //         break;
+
+    //     default:
+    //         callSound6 = sound_9;
+    //         break;
+    // }
+
     console.log("Call Ready Status", callReady.value);
     if (!callReady.value) {
         console.log("calling sound");
@@ -153,14 +340,35 @@ function callQueue() {
     }
     toggle.value = !toggle.value;
     callReady.value = false;
-    callSound2.play();
-    while (!callSound2.ended) {
-        console.log("waiting sound 1");
-        console.log("call status", callSound1.ended);
-        count++;
-    }
-    count = 0;
-    callSound2.play();
+
+    callSound1.play(); // login
+    setTimeout(function () {
+        callSound2.play(); // Call
+    }, 4000);
+    setTimeout(function () {
+        callSound3.play(); //A
+    }, 6000);
+    setTimeout(function () {
+        callSound4.load(); //B
+        callSound4.play(); //0
+    }, 7000);
+    setTimeout(function () {
+        callSound5.load(); //C
+        callSound5.play(); //1
+    }, 8000);
+    setTimeout(function () {
+        callSound6.load(); //D
+        callSound6.play(); //2
+    }, 9000);
+    setTimeout(function () {
+        callSound7.play(); //to
+    }, 10000);
+    setTimeout(function () {
+        callSound8.play(); //1
+    }, 12000);
+    setTimeout(function () {
+        callSound9.play(); //closing
+    }, 13000);
     // while (!callSound2.ended && count < 1000) {
     //     console.log("waiting sound 2");
     //     count++;
@@ -176,6 +384,13 @@ function callQueue() {
         //   soundToCounter.play();
         //  sound_2.play();
     }
+
+    // onMounted(() => {
+    //   //  getResponse();
+    //     // getAdvs();
+    //     // getQueue();
+    //     // getTime();
+    // });
 }
 </script>
 

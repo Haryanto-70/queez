@@ -12,41 +12,41 @@ const users = ref([]);
 const datas = ref([]);
 
 onMounted(() => {
-    getResponse();
+    //  getResponse();
 });
 
-const getResponse = async () => {
-    try {
-        const responses = await axios.get("users ");
-        users.value = responses.data;
-        console.log("interval 2 s");
-        header.value = "READ DATABASE";
-        count.value = count.value + 1;
-    } catch (error) {
-        header.value = "ERROR READ DATABASE";
-    }
-};
+// const getResponse = async () => {
+//     try {
+//         const responses = await axios.get("users ");
+//         users.value = responses.data;
+//         console.log("interval 2 s");
+//         header.value = "READ DATABASE";
+//         count.value = count.value + 1;
+//     } catch (error) {
+//         header.value = "ERROR READ DATABASE";
+//     }
+// };
 
-const interval2Sec = setInterval(() => {
-    if (header.value == "Hallo") {
-        getResponse();
-    } else {
-        header.value = "Hallo";
-    }
-}, 2000);
+// const interval2Sec = setInterval(() => {
+//     if (header.value == "Hallo") {
+//         getResponse();
+//     } else {
+//         header.value = "Hallo";
+//     }
+// }, 2000);
 
-const interval1Sec = setInterval(() => {
-    if (header2.value == "Hallo-2") {
-        header2.value = "THIS IS DASBOARD 2";
-        console.log("interval 1 s");
-    } else {
-        header2.value = "Hallo-2";
-    }
-}, 1000);
+// const interval1Sec = setInterval(() => {
+//     if (header2.value == "Hallo-2") {
+//         header2.value = "THIS IS DASBOARD 2";
+//         console.log("interval 1 s");
+//     } else {
+//         header2.value = "Hallo-2";
+//     }
+// }, 1000);
 
 onUnmounted(() => {
-    clearInterval(interval2Sec);
-    clearInterval(interval1Sec);
+    // clearInterval(interval2Sec);
+    // clearInterval(interval1Sec);
     console.log("on Unmounted");
 });
 
