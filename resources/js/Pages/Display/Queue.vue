@@ -7,9 +7,11 @@ defineProps({ qNo: String });
 <template>
     <div>
         <div
-            class="flex w-56 bg-cyan-300 py-2 text-center rounded-md mb-2 h-12"
+            class="flex w-56 bg-[#EB5B00] py-2 text-center rounded-md mb-2 h-12"
         >
-            <p class="text-2xl flex mx-auto font-bold">{{ qNo }}</p>
+            <p class="text-2xl flex mx-auto font-bold text-dark-50">
+                {{ qNo }}
+            </p>
         </div>
     </div>
 </template>

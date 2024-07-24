@@ -42,11 +42,13 @@ function queueprint() {
 </script>
 
 <template>
-    <div class="flex justify-center min-h-svh bg-yellow-600 items-center">
-        <div class="flex-col bg-yellow-100 w-2/5 rounded-xl">
-            <h1 class="text-center text-2xl py-3">TICKETING SYSTEM</h1>
+    <div class="flex justify-center min-h-svh bg-[#F3FEB8] items-center">
+        <div class="flex-col bg-[#FFB22C] w-2/5 rounded-xl">
+            <h1 class="text-center text-2xl py-3 text-slate-900">
+                TICKETING SYSTEM
+            </h1>
             <div v-if="queprint">
-                <h1 class="text-center text-4xl py-3">
+                <h1 class="text-center text-4xl py-3 text-slate-900">
                     SILAHKAN PILIH LAYANAN
                 </h1>
 

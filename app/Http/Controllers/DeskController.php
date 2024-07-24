@@ -62,12 +62,26 @@ class DeskController extends Controller
         $uid = Auth::user()->id;
         $type = request('type');
         // dd($type);
-        $data = DB::table('queue')
-            ->where('status', 'new')
-            ->orderBy('service_type')
-            ->orderBy('created_at')
-            ->select('*')
-            ->get();
+
+        if ($type == 'all') {
+            $data = DB::table('queue')
+                ->where('status', 'new')
+                ->orderBy('service_type')
+                ->orderBy('created_at')
+                ->select('*')
+                ->limit(20)
+                ->get();
+        } else {
+            $data = DB::table('queue')
+                ->where('status', 'new')
+                ->where('service_type', $type)
+                ->orderBy('service_type')
+                ->orderBy('created_at')
+                ->select('*')
+                ->limit(20)
+                ->get();
+        }
+
 
         return response()->json($data);
     }

@@ -9,9 +9,10 @@ axios.defaults.baseURL = "http://127.0.0.1:8000/";
 const header = ref("Hallo");
 const header2 = ref("Hallo-2");
 const count = ref(0);
-const users = ref([]);
+const queues = ref([]);
 const datas = ref([]);
 const time = ref();
+const callReady = ref(true);
 const namapt = ref("PT. BANK RAKYAT INDONESIA");
 const inCounter1 = ref("A001");
 const inCounter2 = ref("A002");
@@ -55,13 +56,16 @@ const toggle = ref(true);
 
 onMounted(() => {
     getResponse();
+    getAdvs();
+    getQueue();
+    getTime();
 });
 
 const getResponse = async () => {
     try {
-        const responses = await axios.get("users ");
-        users.value = responses.data;
-        console.log("interval 2 2 Display");
+        const responses = await axios.get("dsiplay/queue ");
+        queues.value = responses.data;
+        console.log("interval getQueue", queues);
         header.value = "READ DATABASE";
         count.value = count.value + 1;
     } catch (error) {
@@ -69,7 +73,7 @@ const getResponse = async () => {
     }
 };
 
-setInterval(() => {
+const getQueue = setInterval(() => {
     if (header.value == "Hallo") {
         getResponse();
     } else {
@@ -77,13 +81,13 @@ setInterval(() => {
     }
 }, 2000);
 
-setInterval(() => {
+const getTime = setInterval(() => {
     let times = Date().toString();
     let index = times.indexOf("GMT") - 1;
     time.value = times.substring(0, index);
 }, 1000);
 
-setInterval(() => {
+const getAdvs = setInterval(() => {
     active1.value = false;
     active2.value = false;
     active3.value = false;
@@ -123,21 +127,55 @@ setInterval(() => {
     }
     ads--;
     ads = ads <= 0 ? 4 : ads;
-    console.log("ads no: ", ads);
-    //soundAttention.play();
-    if (soundAttention.ended) {
-        soundToCounter.play();
-        sound_12.play();
-    }
 }, 10000);
 
 onUnmounted(() => {
-    clearInterval();
+    clearInterval(getQueue);
+    clearInterval(getTime);
+    clearInterval(getAds);
     console.log("on Unmounted");
 });
 
 function onDisplay() {
-    router.get("/dsiplay");
+    router.get("/dsiplay/queue");
+}
+
+function callQueue() {
+    let count = 0;
+    const callSound1 = soundAttention;
+    const callSound2 = soundQueNo;
+    const callSound6 = soundToCounter;
+    console.log("Call Ready Status", callReady.value);
+    if (!callReady.value) {
+        console.log("calling sound");
+        callReady.value = true;
+        return;
+    }
+    toggle.value = !toggle.value;
+    callReady.value = false;
+    callSound2.play();
+    while (!callSound2.ended) {
+        console.log("waiting sound 1");
+        console.log("call status", callSound1.ended);
+        count++;
+    }
+    count = 0;
+    callSound2.play();
+    // while (!callSound2.ended && count < 1000) {
+    //     console.log("waiting sound 2");
+    //     count++;
+    // }
+    // count = 0;
+    // callSound6.play();
+    // while (!callSound6.ended && count < 1000) {
+    //     console.log("waiting sound 3");
+    //     count++;
+    // }
+
+    if (soundAttention.ended) {
+        //   soundToCounter.play();
+        //  sound_2.play();
+    }
 }
 </script>
 
@@ -148,11 +186,13 @@ function onDisplay() {
                 <div class="flex flex-row items-center">
                     <img src="/images/logobri.JPEG" width="100px" alt="" />
                     <div>
-                        <p class="text-light-200 text-2xl">{{ namapt }}</p>
+                        <p class="text-cool-gray-800 text-2xl font-bold pl-2">
+                            {{ namapt }}
+                        </p>
                     </div>
                 </div>
                 <div
-                    class="text-slate-800 text-2xl font-bold flex items-center"
+                    class="text-cool-gray-800 text-2xl font-bold flex items-center"
                 >
                     {{ time }}
                 </div>
@@ -192,29 +232,29 @@ function onDisplay() {
             <div class="w-full flex flex-col h-full mx-1">
                 <div class="h-1/2">
                     <div
-                        class="w-full bg-orange-500 flex justify-center text-2xl mb-2 py-3 font-extrabold text-slate-100 rounded-t-lg"
+                        class="w-full bg-[#B60071] flex justify-center text-2xl mb-2 py-3 font-extrabold text-slate-100 rounded-t-lg"
                     >
                         Customer Service
                     </div>
                     <div class="flex flex-col">
-                        <Queue qNo="A001" class="flex justify-center" />
-                        <Queue qNo="A001" class="flex justify-center" />
-                        <Queue qNo="A001" class="flex justify-center" />
-                        <Queue qNo="A001" class="flex justify-center" />
-                        <Queue qNo=" " class="flex justify-center" />
+                        <Queue :qNo="queues.cs1" class="flex justify-center" />
+                        <Queue :qNo="queues.cs2" class="flex justify-center" />
+                        <Queue :qNo="queues.cs3" class="flex justify-center" />
+                        <Queue :qNo="queues.cs4" class="flex justify-center" />
+                        <Queue :qNo="queues.cs5" class="flex justify-center" />
                     </div>
                 </div>
                 <div class="h-48">
                     <div
-                        class="w-full bg-orange-500 flex justify-center text-2xl mb-2 py-3 font-extrabold text-slate-100 rounded-t-lg"
+                        class="w-full bg-[#B60071] flex justify-center text-2xl mb-2 py-3 font-extrabold text-slate-100 rounded-t-lg"
                     >
                         Special Transaction
                     </div>
                     <div class="flex flex-col">
-                        <Queue qNo="B001" class="flex justify-center" />
-                        <Queue qNo="B001" class="flex justify-center" />
-                        <Queue qNo="B001" class="flex justify-center" />
-                        <Queue qNo="B001" class="flex justify-center" />
+                        <Queue :qNo="queues.cs6" class="flex justify-center" />
+                        <Queue :qNo="queues.cs7" class="flex justify-center" />
+                        <Queue :qNo="queues.cs8" class="flex justify-center" />
+                        <Queue :qNo="queues.cs9" class="flex justify-center" />
                     </div>
                 </div>
             </div>
@@ -257,6 +297,7 @@ function onDisplay() {
             </div>
             <div>
                 <Counter
+                    @click="callQueue"
                     cNo="06"
                     :inService="inCounter6"
                     class="bg-[#F6FB7A]"

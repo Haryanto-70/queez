@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/users', [ProfileController::class, 'users'])->name('profile.users');
 
     Route::get('/display', [DisplayController::class, 'display'])->name('display');
+    Route::get('/dsiplay/queue', [DisplayController::class, 'displayqueue'])->name('display.queue');
 
     Route::get('/desk/{dNo}', [DeskController::class, 'desk'])->name('desk');
     Route::get('/userdesk', [DeskController::class, 'userdesk'])->name('userdesk');
