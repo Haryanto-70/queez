@@ -6,19 +6,28 @@ axios.defaults.baseURL = "http://127.0.0.1:8000/";
 
 const header = ref();
 const queues = ref([]);
+const queueNo = ref({});
 const users = ref([]);
 const deskNo = ref();
+const selectView = ref(true);
 
 onMounted(() => {
     getResponse();
     getResponse2("all");
+    console.log('on mounted Desk',queues.value);
+    if (queues.value.queue_no == "---") {
+
+        selectView.value = true;
+    }else{
+        selectView.value = false;
+    }
 });
 
 const getResponse = async (type) => {
     try {
         const responses = await axios.get("userdesk");
         users.value = responses.data[0];
-        console.log("user data", users);
+        console.log("user data", users.value.queue_no);
     } catch (error) {
         header.value = "ERROR READ DATABASE";
     }
@@ -56,6 +65,19 @@ const getResponse4 = async (type) => {
     }
 };
 
+const getResponse5 = async (type) => {
+    try {
+        const responses = await axios.put("userdesk/finished/" + type);
+       // queues.value = responses.data;
+       // console.log("queue data", queues);
+    
+    } catch (error) {
+        header.value = "ERROR READ DATABASE";
+    }
+};
+
+
+
 function serviceList(type){
     getResponse2(type);
 }
@@ -63,6 +85,7 @@ function serviceList(type){
 function say(uuid){
     console.log(uuid[0])
     getResponse3(uuid[0])
+    hideSelect();
 }
 
 function calling(qNo){
@@ -71,6 +94,20 @@ function calling(qNo){
            getResponse();
        getResponse2('all');
 }
+
+function hideSelect(){
+
+    selectView.value=!selectView.value
+
+}
+
+function finishedQueue(qNo){
+    hideSelect();
+    getResponse5(qNo);
+}
+
+
+
 </script>
 
 <template>
@@ -102,7 +139,7 @@ function calling(qNo){
                     </p>
                 </div>
             </div>
-            <div class="flex flex-col col-span-2   m-4 fixed right-0 rounded-lg">
+            <div v-if="!selectView" class="flex flex-col col-span-2   m-4 fixed right-0 rounded-lg">
                 <div class="">
                     <div class="">
                         <div
@@ -129,7 +166,7 @@ function calling(qNo){
                                 </p>
                             </div>
                         </div>
-                        <div
+                        <div @click="calling(users.queue_no)"
                             class="flex p-4 m-2 text-xl border-2 w-48 mx-2 py-8 rounded-lg border-dark-500 items-center bg-[#FF4C4C] hover:bg-green-700"
                         >
                             <svg
@@ -147,7 +184,7 @@ function calling(qNo){
                                 />
                             </svg>
 
-                            <div class="flex w-24 ml-2" @click="calling(users.queue_no)">
+                            <div class="flex w-24 ml-2" >
                                 <p class="flex text-center font-bold mx-auto text-sky-50">
                                     CALL
                                 </p>
@@ -201,7 +238,7 @@ function calling(qNo){
                                 </p>
                             </div>
                         </div>
-                        <div
+                        <div @click="finishedQueue(users.queue_no)" 
                             class="flex p-4 m-2 text-xl border-2 w-48 mx-2 py-8 rounded-lg border-dark-500 items-center bg-[#FF4C4C] hover:bg-green-700"
                         >
                             <svg
@@ -224,7 +261,7 @@ function calling(qNo){
                                 />
                             </svg>
 
-                            <div class="flex w-24 ml-2">
+                            <div  class="flex w-24 ml-2">
                                 <p class="flex text-center font-bold mx-auto text-sky-50">
                                     FINISH
                                 </p>
@@ -329,7 +366,7 @@ function calling(qNo){
                             </td>
 
                             <td class="text-center">
-                                <a
+                                <a v-if="selectView"
                                     @click="say([item.quuid,item.queue_no])"
                                     href="#"
                                     class="font-medium   text-blue-600 dark:text-blue-500 hover:underline"

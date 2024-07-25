@@ -131,6 +131,26 @@ class DeskController extends Controller
                 'in_counter' => $data[0]->desk_no
             ]);
 
+        //  return response()->json(['status' => 'ok']);
+    }
+    public function finishedqueue(Request $request)
+    {
+        $uid = Auth::user()->id;
+        $qNo = $request['qNo'];
+
+        // dd($uid);
+        DB::table('queue')
+            ->where('queue_no', $qNo)
+            ->whereIn('status', ['called', 'pending'])
+            ->update([
+                'status' => 'finihed',
+                'in_counter' => 0,
+            ]);
+        DB::table('desk')
+            ->where('user_id', $uid)
+            ->where('queue_no', $qNo)
+            ->update(['queue_no' => '----']);
+
 
 
         //  return response()->json(['status' => 'ok']);
