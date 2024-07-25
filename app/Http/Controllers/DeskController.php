@@ -65,7 +65,7 @@ class DeskController extends Controller
 
         if ($type == 'all') {
             $data = DB::table('queue')
-                ->where('status', 'new')
+                ->whereIn('status', ['new', 'pending'])
                 ->orderBy('service_type')
                 ->orderBy('created_at')
                 ->select('*')
@@ -73,7 +73,7 @@ class DeskController extends Controller
                 ->get();
         } else {
             $data = DB::table('queue')
-                ->where('status', 'new')
+                ->whereIn('status', ['new', 'pending'])
                 ->where('service_type', $type)
                 ->orderBy('service_type')
                 ->orderBy('created_at')

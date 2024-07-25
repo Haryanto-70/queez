@@ -154,7 +154,7 @@ function callQueue() {
     const char2 = queue[1];
     const char3 = queue[2];
     const char4 = queue[3];
-    callReady.value = false;
+    //   callReady.value = false;
     console.log(char1, char2, char3, char4);
     const callSound1 = soundAttention;
     const callSound2 = soundQueNo;
@@ -322,24 +322,24 @@ function callQueue() {
     setTimeout(function () {
         callSound4.load(); //B
         callSound4.play(); //0
-    }, 7000);
+    }, 7500);
     setTimeout(function () {
         callSound5.load(); //C
         callSound5.play(); //1
-    }, 8000);
+    }, 10000);
     setTimeout(function () {
         callSound6.load(); //D
         callSound6.play(); //2
-    }, 9000);
+    }, 11500);
     setTimeout(function () {
         callSound7.play(); //to
-    }, 10000);
+    }, 13500);
     setTimeout(function () {
         callSound8.play(); //1
-    }, 12000);
+    }, 15200);
     setTimeout(function () {
         callSound9.play(); //closing
-    }, 13000);
+    }, 16500);
 
     // onMounted(() => {
     //   //  getResponse();

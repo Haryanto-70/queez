@@ -270,7 +270,8 @@ function serviceList(type){
                         <th class="w-12 text-xl ">No</th>
                         <th class="w-40 text-xl">Queue Number</th>
                         <th class="w-32 text-xl">Category</th>
-                        <th class="w-48 text-xl">Date</th>
+                        <th class="w-32 text-xl">Status</th>              
+                        <th class="w-48 text-xl">Time</th>
                         <th class="w-32 text-xl">Action</th>
                     
                         </tr>
@@ -281,6 +282,9 @@ function serviceList(type){
                             <td>{{ item.queue_no }}</td>
                             <td class="text-center">
                                 {{ item.service_type }}
+                            </td>
+                            <td class="text-center">
+                                {{ item.status }}
                             </td>
                             <td class="text-center">
                                 {{ item.created_at }}
