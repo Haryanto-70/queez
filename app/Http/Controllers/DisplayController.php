@@ -24,7 +24,7 @@ class DisplayController extends Controller
         return Inertia::render('Display/Display');
     }
 
-    public function displayqueue()
+    public function displayqueue(Request $request)
     {
         //  dd('test point');
         $dataAC = DB::table('queue')
@@ -127,7 +127,100 @@ class DisplayController extends Controller
 
         //  dd($cs1, $cs2, $cs3, $cs4, $cs5, $cs6, $cs7, $cs8, $cs9, $cs10, $status1, $status2, $status3, $status4, $status5, $status6, $status7, $status8, $status9, $status10);
 
+        $dataCall = DB::table('queue')
+            ->where('status', 'call')
+            ->orderBy('created_at')
+            ->limit(1)
+            ->get();
 
+        // dd($dataCall);
+
+        if ($dataCall->count() > 0) {
+            $queueCall = $dataCall[0]->queue_no;
+            $statusCall =  $dataCall[0]->status;
+            $counterCall = $dataCall[0]->in_counter;
+            $idCall = $dataCall[0]->id;
+        }
+        // dd($dataCall);
+
+        $qNoCounter1 = DB::table('queue')
+            ->where('status', '=', 'call')
+            ->where('in_counter', 1)
+            ->orderBy('created_at')
+            ->select('queue_no')
+            ->limit(1)
+            ->get();
+
+        $qNoCounter2 = DB::table('queue')
+            ->where('status', '=', 'call')
+            ->where('in_counter', 2)
+            ->orderBy('created_at')
+            ->select('queue_no')
+            ->limit(1)
+            ->get();
+        $qNoCounter3 = DB::table('queue')
+            ->where('status', '=', 'call')
+            ->where('in_counter', 3)
+            ->orderBy('created_at')
+            ->select('queue_no')
+            ->limit(1)
+            ->get();
+        $qNoCounter4 = DB::table('queue')
+            ->where('status', '=', 'call')
+            ->where('in_counter', 4)
+            ->orderBy('created_at')
+            ->select('queue_no')
+            ->limit(1)
+            ->get();
+        $qNoCounter5 = DB::table('queue')
+            ->where('status', '=', 'call')
+            ->where('in_counter', 5)
+            ->orderBy('created_at')
+            ->select('queue_no')
+            ->limit(1)
+            ->get();
+        $qNoCounter6 = DB::table('queue')
+            ->where('status', '=', 'call')
+            ->where('in_counter', 6)
+            ->orderBy('created_at')
+            ->select('queue_no')
+            ->limit(1)
+            ->get();
+
+        // dd($qNoCounter6);
+
+        if ($qNoCounter1->count() > 0) {
+            $qNoCounter1 = $qNoCounter1[0]->queue_no;
+        } else {
+            $qNoCounter1 = "----";
+        }
+        if ($qNoCounter2->count() > 0) {
+            $qNoCounter2 = $qNoCounter2[0]->queue_no;
+        } else {
+            $qNoCounter2 = "----";
+        }
+        if ($qNoCounter3->count() > 0) {
+            $qNoCounter3 = $qNoCounter3[0]->queue_no;
+        } else {
+            $qNoCounter3 = "----";
+        }
+        if ($qNoCounter4->count() > 0) {
+            $qNoCounter4 = $qNoCounter4[0]->queue_no;
+        } else {
+            $qNoCounter4 = "----";
+        }
+        if ($qNoCounter5->count() > 0) {
+            $qNoCounter5 = $qNoCounter5[0]->queue_no;
+        } else {
+            $qNoCounter5 = "----";
+        }
+        if ($qNoCounter6->count() > 0) {
+            $qNoCounter6 = $qNoCounter6[0]->queue_no;
+        } else {
+            $qNoCounter6 = "----";
+        }
+
+        //  dd($qNoCounter6[0]);
 
         return response()->json([
 
@@ -151,6 +244,12 @@ class DisplayController extends Controller
             'status9' => $status9,
             'cs10' => $cs10,
             'status10' => $status10,
+            'counterNo1' => $qNoCounter1,
+            'counterNo2' => $qNoCounter2,
+            'counterNo3' => $qNoCounter3,
+            'counterNo4' => $qNoCounter4,
+            'counterNo5' => $qNoCounter5,
+            'counterNo6' => $qNoCounter6,
 
         ]);
     }

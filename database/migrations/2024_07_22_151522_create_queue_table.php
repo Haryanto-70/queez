@@ -21,6 +21,10 @@ return new class extends Migration
             /** A001 B001 dst */
             $table->string('status')->default('new');
             /** new called inservice pending finish */
+            $table->integer('in_counter')->default('0');
+            /** service counter number */
+            $table->integer('user_id')->nullable();
+            /** service counter number */
             $table->time('started_at')->nullable();
             /** inservice started  */
             $table->time('finished_at')->nullable();

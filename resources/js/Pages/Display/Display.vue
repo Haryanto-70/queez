@@ -147,7 +147,7 @@ function callQueue() {
     const char2 = queue[1];
     const char3 = queue[2];
     const char4 = queue[3];
-
+    callReady.value = false;
     console.log(char1, char2, char3, char4);
     const callSound1 = soundAttention;
     const callSound2 = soundQueNo;
@@ -294,44 +294,6 @@ function callQueue() {
             break;
     }
 
-    // console.log("char 4 ", char4);
-    // switch (char4) {
-    //     case 0:
-    //         callSound6 = sound_0;
-    //         break;
-    //     case 1:
-    //         callSound6 = sound_1;
-    //         break;
-    //     case 2:
-    //         callSound6 = sound_2;
-    //         break;
-    //     case 3:
-    //         callSound6 = sound_3;
-    //         break;
-    //     case 4:
-    //         callSound6 = sound_4;
-    //         break;
-    //     case 5:
-    //         callSound6 = sound_5;
-    //         break;
-    //     case 6:
-    //         callSound6 = sound_6;
-    //         break;
-    //     case 7:
-    //         callSound6 = sound_7;
-    //         break;
-    //     case 8:
-    //         callSound6 = sound_8;
-    //         break;
-    //     case 9:
-    //         callSound6 = sound_9;
-    //         break;
-
-    //     default:
-    //         callSound6 = sound_9;
-    //         break;
-    // }
-
     console.log("Call Ready Status", callReady.value);
     if (!callReady.value) {
         console.log("calling sound");
@@ -339,13 +301,15 @@ function callQueue() {
         return;
     }
     toggle.value = !toggle.value;
-    callReady.value = false;
 
+    callSound1.load();
     callSound1.play(); // login
     setTimeout(function () {
+        callSound2.load();
         callSound2.play(); // Call
     }, 4000);
     setTimeout(function () {
+        callSound3.load();
         callSound3.play(); //A
     }, 6000);
     setTimeout(function () {
@@ -369,21 +333,6 @@ function callQueue() {
     setTimeout(function () {
         callSound9.play(); //closing
     }, 13000);
-    // while (!callSound2.ended && count < 1000) {
-    //     console.log("waiting sound 2");
-    //     count++;
-    // }
-    // count = 0;
-    // callSound6.play();
-    // while (!callSound6.ended && count < 1000) {
-    //     console.log("waiting sound 3");
-    //     count++;
-    // }
-
-    if (soundAttention.ended) {
-        //   soundToCounter.play();
-        //  sound_2.play();
-    }
 
     // onMounted(() => {
     //   //  getResponse();
