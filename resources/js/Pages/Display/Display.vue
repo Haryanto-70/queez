@@ -65,8 +65,15 @@ const getResponse = async () => {
     try {
         const responses = await axios.get("dsiplay/queue ");
         queues.value = responses.data;
-        console.log("interval getQueue", queues);
-        header.value = "READ DATABASE";
+        inCounter1.value = queues.value.counterNo1;
+        inCounter2.value = queues.value.counterNo2;
+        inCounter3.value = queues.value.counterNo3;
+        inCounter4.value = queues.value.counterNo4;
+        inCounter5.value = queues.value.counterNo5;
+        inCounter6.value = queues.value.counterNo6;
+
+        console.log("interval getQueue", queues.value.counterNo3);
+
         count.value = count.value + 1;
     } catch (error) {
         header.value = "ERROR READ DATABASE";
