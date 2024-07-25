@@ -13,6 +13,9 @@ const queues = ref([]);
 const datas = ref([]);
 const time = ref();
 const callReady = ref(true);
+const callQueueNo = ref("-911");
+const callDeskNo = ref(5);
+const callQUuid = ref("AXAX");
 const namapt = ref("PT. BANK RAKYAT INDONESIA");
 const inCounter1 = ref("C001");
 const inCounter2 = ref("A002");
@@ -71,9 +74,16 @@ const getResponse = async () => {
         inCounter4.value = queues.value.counterNo4;
         inCounter5.value = queues.value.counterNo5;
         inCounter6.value = queues.value.counterNo6;
-
-        console.log("interval getQueue", queues.value.counterNo3);
-
+        callQueueNo.value = queues.value.callQNumber;
+        callDeskNo.value = queues.value.callDeskNumber;
+        callQUuid.value = queues.value.quuid;
+        console.log(
+            "interval getQueue",
+            callQueueNo.value,
+            callDeskNo.value,
+            callQUuid.value
+        );
+        callQueue();
         count.value = count.value + 1;
     } catch (error) {
         header.value = "ERROR READ DATABASE";
@@ -140,22 +150,51 @@ onUnmounted(() => {
     clearInterval(getQueue);
     clearInterval(getTime);
     clearInterval(getAdvs);
-    console.log("on Unmounted");
+    //   console.log("on Unmounted");
 });
 
 function onDisplay() {
     router.get("/dsiplay/queue");
 }
 
+const callNext = async (qUuid) => {
+    try {
+        const responses = await axios.put("queue/next/" + qUuid);
+        callDeskNo.value = 0;
+        callQueueNo.value = "----";
+        console.log(responses.data);
+        //change ready here for next call
+
+        callReady.value = true;
+    } catch (error) {
+        console.log("error", error);
+    }
+};
+
 function callQueue() {
     let count = 0;
-    let queue = inCounter1.value;
+    let queue = callQueueNo.value;
     const char1 = queue[0];
     const char2 = queue[1];
     const char3 = queue[2];
     const char4 = queue[3];
-    //   callReady.value = false;
-    console.log(char1, char2, char3, char4);
+    const deskNo = callDeskNo.value;
+    const qUuid = callQUuid.value;
+    console.log("call queue");
+    if (char1 == "-") {
+        console.log("no call");
+        console.log("wait for calling");
+        return;
+    }
+
+    if (!callReady.value) {
+        console.log("calling sound");
+        console.log("wait for calling");
+        return;
+    }
+
+    //  callReady.value = false;
+    //  console.log(char1, char2, char3, char4);
     const callSound1 = soundAttention;
     const callSound2 = soundQueNo;
     let callSound3 = sound_A;
@@ -163,8 +202,10 @@ function callQueue() {
     let callSound5 = sound_1;
     let callSound6 = sound_2;
     const callSound7 = soundToCounter;
-    const callSound8 = sound_1;
+    let callSound8 = sound_1;
     const callSound9 = soundAttention;
+
+    callReady.value = false;
 
     switch (char1) {
         case "A":
@@ -185,7 +226,6 @@ function callQueue() {
             break;
     }
 
-    console.log("char 2 ", char2);
     switch (char2) {
         case "0":
             callSound4 = sound_0;
@@ -222,8 +262,6 @@ function callQueue() {
             callSound4 = sound_9;
             break;
     }
-
-    console.log("char 3 ", char3);
 
     switch (char3) {
         case "0":
@@ -262,8 +300,6 @@ function callQueue() {
             break;
     }
 
-    console.log("char 4 ", char4);
-
     switch (char4) {
         case "0":
             callSound6 = sound_0;
@@ -301,13 +337,46 @@ function callQueue() {
             break;
     }
 
-    console.log("Call Ready Status", callReady.value);
-    if (!callReady.value) {
-        console.log("calling sound");
-        callReady.value = true;
-        return;
+    switch (deskNo) {
+        case 0:
+            callSound8 = sound_0;
+            break;
+        case 1:
+            callSound8 = sound_1;
+            break;
+        case 2:
+            callSound8 = sound_2;
+            break;
+        case 3:
+            callSound8 = sound_3;
+            break;
+        case 4:
+            callSound8 = sound_4;
+            break;
+        case 5:
+            callSound8 = sound_5;
+            break;
+        case 6:
+            callSound8 = sound_6;
+            break;
+        case 7:
+            callSound8 = sound_7;
+            break;
+        case 8:
+            callSound8 = sound_8;
+            break;
+        case 9:
+            callSound8 = sound_9;
+            break;
+
+        default:
+            callSound8 = sound_10;
+            break;
     }
-    toggle.value = !toggle.value;
+
+    console.log("Call Ready Status", callReady.value);
+
+    // toggle.value = !toggle.value;
 
     callSound1.load();
     callSound1.play(); // login
@@ -336,10 +405,13 @@ function callQueue() {
     }, 13500);
     setTimeout(function () {
         callSound8.play(); //1
-    }, 15200);
+    }, 15500);
     setTimeout(function () {
         callSound9.play(); //closing
     }, 16500);
+    setTimeout(function () {
+        callNext(qUuid);
+    }, 17000);
 
     // onMounted(() => {
     //   //  getResponse();

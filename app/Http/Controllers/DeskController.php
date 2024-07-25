@@ -50,8 +50,7 @@ class DeskController extends Controller
         $data = DB::table('desk')
             ->where('user_id', $uid)
             ->join('users', 'users.id', 'desk.user_id')
-            ->select('desk.desk_no', 'desk.status', 'users.name', 'users.id', 'users.role')
-
+            ->select('desk.desk_no', 'desk.status', 'desk.queue_no', 'users.name', 'users.id', 'users.role')
             ->get();
 
         return response()->json($data);
@@ -66,6 +65,7 @@ class DeskController extends Controller
         if ($type == 'all') {
             $data = DB::table('queue')
                 ->whereIn('status', ['new', 'pending'])
+                ->where('in_counter', 0)
                 ->orderBy('service_type')
                 ->orderBy('created_at')
                 ->select('*')
@@ -75,6 +75,7 @@ class DeskController extends Controller
             $data = DB::table('queue')
                 ->whereIn('status', ['new', 'pending'])
                 ->where('service_type', $type)
+                ->where('in_counter', 0)
                 ->orderBy('service_type')
                 ->orderBy('created_at')
                 ->select('*')
@@ -84,5 +85,54 @@ class DeskController extends Controller
 
 
         return response()->json($data);
+    }
+
+    public function selectqueue(Request $request)
+    {
+        $uid = Auth::user()->id;
+        $qUuid = $request['quuid'];
+        //  dd($qUuid);
+        $data = DB::table('queue')
+            ->where('quuid', $qUuid)
+            ->select('queue_no')
+            ->get();
+
+        // dd(($data[0]->queue_no));
+
+        DB::table('queue')
+            ->where('quuid', $qUuid)
+            ->update(['user_id' => $uid]);
+
+        DB::table('desk')
+            ->where('user_id', $uid)
+            ->where('status', 'inservice')
+            ->update(['queue_no' => $data[0]->queue_no]);
+
+
+        //  return response()->json(['status' => 'ok']);
+    }
+
+    public function callqueue(Request $request)
+    {
+        $uid = Auth::user()->id;
+        $qNo = $request['qNo'];
+        $data = DB::table('desk')
+            ->where('user_id', $uid)
+            ->where('status', 'inservice')
+            ->select('desk_no')
+            ->get();
+
+        // dd($uid);
+        DB::table('queue')
+            ->where('queue_no', $qNo)
+            ->whereIn('status', ['new', 'pending'])
+            ->update([
+                'status' => 'call',
+                'in_counter' => $data[0]->desk_no
+            ]);
+
+
+
+        //  return response()->json(['status' => 'ok']);
     }
 }

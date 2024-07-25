@@ -39,9 +39,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/desk/{dNo}', [DeskController::class, 'desk'])->name('desk');
     Route::get('/userdesk', [DeskController::class, 'userdesk'])->name('userdesk');
     Route::get('/userdesk/queue/{type}', [DeskController::class, 'queuelist'])->name('queuelist');
+    Route::put('/userdesk/select/{quuid}', [DeskController::class, 'selectqueue'])->name('selectqueue');
+    Route::put('/userdesk/calling/{qNo}', [DeskController::class, 'callqueue'])->name('callqueue');
 
     Route::get('/dispenser', [DisplayController::class, 'dispenser'])->name('dispenser');
     Route::put('/queue/{sId}', [DisplayController::class, 'queue'])->name('queue');
+    Route::put('/queue/next/{qId}', [DisplayController::class, 'callnext'])->name('callnext');
 });
 
 require __DIR__ . '/auth.php';

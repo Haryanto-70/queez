@@ -33,9 +33,43 @@ const getResponse2 = async (type) => {
         header.value = "ERROR READ DATABASE";
     }
 };
+const getResponse3 = async (type) => {
+    try {
+        const responses = await axios.put("userdesk/select/" + type);
+       // queues.value = responses.data;
+       // console.log("queue data", queues);
+       getResponse();
+       getResponse2('all');
+    } catch (error) {
+        header.value = "ERROR READ DATABASE";
+    }
+};
+
+const getResponse4 = async (type) => {
+    try {
+        const responses = await axios.put("userdesk/calling/" + type);
+       // queues.value = responses.data;
+       // console.log("queue data", queues);
+    
+    } catch (error) {
+        header.value = "ERROR READ DATABASE";
+    }
+};
 
 function serviceList(type){
     getResponse2(type);
+}
+
+function say(uuid){
+    console.log(uuid[0])
+    getResponse3(uuid[0])
+}
+
+function calling(qNo){
+    console.log(qNo);
+    getResponse4(qNo);
+           getResponse();
+       getResponse2('all');
 }
 </script>
 
@@ -64,7 +98,7 @@ function serviceList(type){
                     <p
                         class="font-bold text-7xl flex items-center text-yellow-700 ml-2"
                     >
-                        00000
+                        {{ users.queue_no }}
                     </p>
                 </div>
             </div>
@@ -113,7 +147,7 @@ function serviceList(type){
                                 />
                             </svg>
 
-                            <div class="flex w-24 ml-2">
+                            <div class="flex w-24 ml-2" @click="calling(users.queue_no)">
                                 <p class="flex text-center font-bold mx-auto text-sky-50">
                                     CALL
                                 </p>
@@ -272,6 +306,7 @@ function serviceList(type){
                         <th class="w-32 text-xl">Category</th>
                         <th class="w-32 text-xl">Status</th>              
                         <th class="w-48 text-xl">Time</th>
+                        <th class="w-48 text-xl">ID</th>
                         <th class="w-32 text-xl">Action</th>
                     
                         </tr>
@@ -290,8 +325,12 @@ function serviceList(type){
                                 {{ item.created_at }}
                             </td>
                             <td class="text-center">
+                                {{ item.quuid }}
+                            </td>
+
+                            <td class="text-center">
                                 <a
-                                    @click="say([item])"
+                                    @click="say([item.quuid,item.queue_no])"
                                     href="#"
                                     class="font-medium   text-blue-600 dark:text-blue-500 hover:underline"
                                     >Select

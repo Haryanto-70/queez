@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 
 
@@ -144,7 +145,7 @@ class DisplayController extends Controller
         // dd($dataCall);
 
         $qNoCounter1 = DB::table('queue')
-            ->where('status', '=', 'call')
+            ->where('status', '<>', 'closed')
             ->where('in_counter', 1)
             ->orderBy('created_at')
             ->select('queue_no')
@@ -152,35 +153,35 @@ class DisplayController extends Controller
             ->get();
 
         $qNoCounter2 = DB::table('queue')
-            ->where('status', '=', 'call')
+            ->where('status', '<>', 'closed')
             ->where('in_counter', 2)
             ->orderBy('created_at')
             ->select('queue_no')
             ->limit(1)
             ->get();
         $qNoCounter3 = DB::table('queue')
-            ->where('status', '=', 'call')
+            ->where('status', '<>', 'closed')
             ->where('in_counter', 3)
             ->orderBy('created_at')
             ->select('queue_no')
             ->limit(1)
             ->get();
         $qNoCounter4 = DB::table('queue')
-            ->where('status', '=', 'call')
+            ->where('status', '<>', 'closed')
             ->where('in_counter', 4)
             ->orderBy('created_at')
             ->select('queue_no')
             ->limit(1)
             ->get();
         $qNoCounter5 = DB::table('queue')
-            ->where('status', '=', 'call')
+            ->where('status', '<>', 'closed')
             ->where('in_counter', 5)
             ->orderBy('created_at')
             ->select('queue_no')
             ->limit(1)
             ->get();
         $qNoCounter6 = DB::table('queue')
-            ->where('status', '=', 'call')
+            ->where('status', '<>', 'closed')
             ->where('in_counter', 6)
             ->orderBy('created_at')
             ->select('queue_no')
@@ -222,6 +223,25 @@ class DisplayController extends Controller
 
         //  dd($qNoCounter6[0]);
 
+        $data = DB::table('queue')
+            ->whereIn('status', ['call', 'recall'])
+            ->orderBy("created_at")
+            ->select('quuid', 'queue_no', 'in_counter')
+            ->limit(1)
+            ->get();
+
+
+        $callQNumber = "----";
+        $callDeskNumber = 0;
+        $callQUuid = '0';
+
+        if ($data->count() > 0) {
+            $callQNumber = $data[0]->queue_no;
+            $callDeskNumber = $data[0]->in_counter;
+            $callQUuid = $data[0]->quuid;
+        }
+        // dd($callQNumber, $callDeskNumber);
+
         return response()->json([
 
             'cs1' => $cs1,
@@ -250,6 +270,9 @@ class DisplayController extends Controller
             'counterNo4' => $qNoCounter4,
             'counterNo5' => $qNoCounter5,
             'counterNo6' => $qNoCounter6,
+            'callQNumber' => $callQNumber,
+            'callDeskNumber' => $callDeskNumber,
+            'quuid' =>  $callQUuid,
 
         ]);
     }
@@ -286,6 +309,7 @@ class DisplayController extends Controller
         //dd($queueNo, $sId, $count);
         DB::table('queue')
             ->insert([
+                'quuid' => Str::uuid(),
                 'service_type' => $sId,
                 'queue_id' => $count,
                 'queue_no' => $queueNo,
@@ -308,6 +332,23 @@ class DisplayController extends Controller
             'queue_id' => $count,
             'queue_no' => $queueNo,
             'status' => 'new',
+        ]);
+    }
+
+    public function callnext(Request $request)
+    {
+
+        $qUuid = $request['qId'];
+
+        //  dd($qUuid);
+        DB::table('queue')
+            ->where('quuid', $qUuid)
+            ->update([
+                'status' => 'called',
+            ]);
+
+        return response()->json([
+            'status' => 'ok'
         ]);
     }
 }

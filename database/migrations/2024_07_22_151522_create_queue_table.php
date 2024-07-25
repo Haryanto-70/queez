@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('queue', function (Blueprint $table) {
             $table->id();
+            $table->uuid('quuid');
             $table->string('service_type');
             /** A B C D */
             $table->bigInteger('queue_id')->nullable();
