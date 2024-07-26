@@ -17,9 +17,9 @@ onMounted(() => {
     console.log('on mounted Desk',queues.value);
     if (queues.value.queue_no == "---") {
 
-        selectView.value = true;
-    }else{
         selectView.value = false;
+    }else{
+        selectView.value = true;
     }
 });
 
@@ -103,6 +103,9 @@ function hideSelect(){
 
 function finishedQueue(qNo){
     hideSelect();
+      getResponse4(qNo);
+      getResponse();
+      getResponse2('all');
     getResponse5(qNo);
 }
 
@@ -166,7 +169,7 @@ function finishedQueue(qNo){
                                 </p>
                             </div>
                         </div>
-                        <div @click="calling(users.queue_no)"
+                        <div 
                             class="flex p-4 m-2 text-xl border-2 w-48 mx-2 py-8 rounded-lg border-dark-500 items-center bg-[#FF4C4C] hover:bg-green-700"
                         >
                             <svg
@@ -184,7 +187,7 @@ function finishedQueue(qNo){
                                 />
                             </svg>
 
-                            <div class="flex w-24 ml-2" >
+                            <div class="flex w-24 ml-2" @click="calling(users.queue_no)"> 
                                 <p class="flex text-center font-bold mx-auto text-sky-50">
                                     CALL
                                 </p>
@@ -238,7 +241,7 @@ function finishedQueue(qNo){
                                 </p>
                             </div>
                         </div>
-                        <div @click="finishedQueue(users.queue_no)" 
+                        <div 
                             class="flex p-4 m-2 text-xl border-2 w-48 mx-2 py-8 rounded-lg border-dark-500 items-center bg-[#FF4C4C] hover:bg-green-700"
                         >
                             <svg
@@ -261,7 +264,7 @@ function finishedQueue(qNo){
                                 />
                             </svg>
 
-                            <div  class="flex w-24 ml-2">
+                            <div  class="flex w-24 ml-2" @click="finishedQueue(users.queue_no)" >
                                 <p class="flex text-center font-bold mx-auto text-sky-50">
                                     FINISH
                                 </p>

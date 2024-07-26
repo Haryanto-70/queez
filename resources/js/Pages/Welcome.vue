@@ -28,12 +28,16 @@ function handleImageError() {
 
 <template>
     <Head title="Welcome" />
-    <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
+    <div
+        class="flex flex-center text-black/50 dark:bg-black dark:text-white/50"
+    >
         <img
             id="background"
-            class="absolute -left-20 top-0 max-w-[877px]"
-            src="https://laravel.com/assets/img/welcome/background.svg"
+            class="absolute w-screen -z-2"
+            src="images/home.png"
         />
+        />
+
         <div
             class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white"
         >
@@ -45,26 +49,29 @@ function handleImageError() {
                         <Link
                             v-if="$page.props.auth.user"
                             :href="route('dashboard')"
-                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                            class="rounded-md px-3 py-2 text-white ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                         >
                             Dashboard
                         </Link>
 
                         <template v-else>
-                            <Link
-                                :href="route('login')"
-                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                            >
-                                Log in
-                            </Link>
-
-                            <Link
-                                v-if="canRegister"
-                                :href="route('register')"
-                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                            >
-                                Register
-                            </Link>
+                            <div class="w-64">
+                                <Link
+                                    :href="route('login')"
+                                    class="rounded-md px-3 py-2 text-white ring-1 ring-transparent transition hover:text-red-700 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                >
+                                    Log in
+                                </Link>
+                            </div>
+                            <div class="w-48">
+                                <Link
+                                    v-if="canRegister"
+                                    :href="route('register')"
+                                    class="rounded-md px-3 py-2 text-white ring-1 ring-transparent transition hover:text-red-700 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                >
+                                    Register
+                                </Link>
+                            </div>
                         </template>
                     </nav>
                 </header>
@@ -73,17 +80,17 @@ function handleImageError() {
                     <div class="grid gap-12 lg:grid-cols-1 lg:gap-8">
                         <div class="h-full flex flex-col justify-center">
                             <div class="flex justify-center">
-                                <img
-                                    src="yayasan.png"
-                                    width="200"
+                                <!-- <img
+                                    src="images/home.png"
+                                    width="2800"
                                     alt="yayasan logo"
-                                />
+                                /> -->
                             </div>
-                            <h1
+                            <!-- <h1
                                 class="text-4xl flex justify-center mt-12 mb-24 text-dark-700"
                             >
                                 QUEUEING SYSTEM
-                            </h1>
+                            </h1> -->
                         </div>
                     </div>
                 </main>
