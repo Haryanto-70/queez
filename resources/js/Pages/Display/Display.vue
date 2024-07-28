@@ -206,6 +206,8 @@ function callQueue() {
     const callSound9 = soundAttention;
 
     callReady.value = false;
+    callSound1.load();
+    callSound2.load();
 
     switch (char1) {
         case "A":
@@ -225,6 +227,8 @@ function callQueue() {
             callSound3 = sound_D;
             break;
     }
+
+    callSound3.load();
 
     switch (char2) {
         case "0":
@@ -263,6 +267,8 @@ function callQueue() {
             break;
     }
 
+    callSound4.load();
+
     switch (char3) {
         case "0":
             callSound5 = sound_0;
@@ -299,6 +305,8 @@ function callQueue() {
             callSound5 = sound_9;
             break;
     }
+
+    callSound5.load();
 
     switch (char4) {
         case "0":
@@ -337,6 +345,9 @@ function callQueue() {
             break;
     }
 
+    callSound6.load();
+    callSound7.load();
+
     switch (deskNo) {
         case 0:
             callSound8 = sound_0;
@@ -373,12 +384,13 @@ function callQueue() {
             callSound8 = sound_10;
             break;
     }
+    callSound8.load();
+    callSound9.load();
 
     console.log("Call Ready Status", callReady.value);
 
     // toggle.value = !toggle.value;
 
-    callSound1.load();
     callSound1.play(); // login
     setTimeout(function () {
         callSound2.load();
@@ -405,7 +417,7 @@ function callQueue() {
     }, 13500);
     setTimeout(function () {
         callSound8.play(); //1
-    }, 15500);
+    }, 15800);
     setTimeout(function () {
         callSound9.play(); //closing
     }, 16500);

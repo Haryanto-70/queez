@@ -143,7 +143,7 @@ class DeskController extends Controller
             ->where('queue_no', $qNo)
             ->whereIn('status', ['called', 'pending'])
             ->update([
-                'status' => 'finihed',
+                'status' => 'finished',
                 'in_counter' => 0,
             ]);
         DB::table('desk')
@@ -154,5 +154,19 @@ class DeskController extends Controller
 
 
         //  return response()->json(['status' => 'ok']);
+    }
+
+    public function exitdesk(Request $request): RedirectResponse
+    {
+
+        $uid = Auth::user()->id;
+        // dd('exit desk', $uid);
+        DB::table('desk')
+            ->where('user_id', $uid)
+            ->delete();
+
+
+
+        return redirect()->intended(route('dashboard', absolute: false));
     }
 }

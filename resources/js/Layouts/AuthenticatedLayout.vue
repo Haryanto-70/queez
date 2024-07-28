@@ -12,10 +12,13 @@ const showingNavigationDropdown = ref(false);
 
 <template>
     <div>
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            <nav
-                class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700"
-            >
+        <img
+            id="background"
+            class="absolute w-screen -z-10"
+            src="images/dispenser.png"
+        />
+        <div class="min-h-screen dark:bg-gray-900">
+            <nav class="dark:bg-gray-800 dark:border-gray-700 pt-12 pb-3">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
@@ -28,8 +31,8 @@ const showingNavigationDropdown = ref(false);
                                     /> -->
                                     <div class="flex justify-center">
                                         <img
-                                            src="yayasan.png"
-                                            width="70"
+                                            src="alkemi-f.png"
+                                            width="100"
                                             alt="yayasan logo"
                                         />
                                     </div>
@@ -43,9 +46,8 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink
                                     :href="route('dashboard')"
                                     :active="route().current('dashboard')"
-                                    class=" "
                                 >
-                                    Dashboard
+                                    <p class="text-gray-200">Dashboard</p>
                                 </NavLink>
                             </div>
                             <div
@@ -53,9 +55,9 @@ const showingNavigationDropdown = ref(false);
                             >
                                 <NavLink
                                     :href="route('dashboard')"
-                                    :active="route().current('dashboard')"
+                                    :active="route().current('performance')"
                                 >
-                                    Performance
+                                    <p class="text-gray-200">Performance</p>
                                 </NavLink>
                             </div>
                             <div
@@ -63,9 +65,9 @@ const showingNavigationDropdown = ref(false);
                             >
                                 <NavLink
                                     :href="route('dashboard')"
-                                    :active="route().current('dashboard')"
+                                    :active="route().current('user')"
                                 >
-                                    User Management
+                                    <p class="text-gray-200">User Management</p>
                                 </NavLink>
                             </div>
                         </div>
@@ -178,9 +180,7 @@ const showingNavigationDropdown = ref(false);
                     </div>
 
                     <!-- Responsive Settings Options -->
-                    <div
-                        class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600"
-                    >
+                    <div class="pt-4 pb-1 dark:border-gray-600">
                         <div class="px-4">
                             <div
                                 class="font-medium text-base text-gray-800 dark:text-gray-200"
@@ -210,7 +210,7 @@ const showingNavigationDropdown = ref(false);
 
             <!-- Page Heading -->
             <header
-                class="bg-white dark:bg-gray-800 shadow"
+                class="bg-gradient-to-r from-cyan-500 to-blue-500 dark:bg-gray-800 shadow"
                 v-if="$slots.header"
             >
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">

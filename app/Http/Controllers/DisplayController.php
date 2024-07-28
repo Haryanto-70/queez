@@ -291,7 +291,6 @@ class DisplayController extends Controller
         // dd('test point', $sId);
         $data = DB::table('queue')
             ->where('service_type', '=', $sId)
-            ->where('status', '<>', 'finished')
             ->get();
 
         $count = $data->count() + 1;
@@ -322,9 +321,6 @@ class DisplayController extends Controller
             ->where('queue_no', '=', $queueNo)
             ->where('status', '=', 'new')
             ->get();
-
-
-
 
         // Return JSON response directly
         return response()->json([

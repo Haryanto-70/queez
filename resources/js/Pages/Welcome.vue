@@ -34,8 +34,7 @@ function handleImageError() {
         <img
             id="background"
             class="absolute w-screen -z-2"
-            src="images/home.png"
-        />
+            src="images/Home.png"
         />
 
         <div
@@ -92,6 +91,7 @@ function handleImageError() {
                                 QUEUEING SYSTEM
                             </h1> -->
                         </div>
+                        <div></div>
                     </div>
                 </main>
 

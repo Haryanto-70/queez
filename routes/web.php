@@ -42,6 +42,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/userdesk/select/{quuid}', [DeskController::class, 'selectqueue'])->name('selectqueue');
     Route::put('/userdesk/calling/{qNo}', [DeskController::class, 'callqueue'])->name('callqueue');
     Route::put('/userdesk/finished/{qNo}', [DeskController::class, 'finishedqueue'])->name('finishedqueue');
+    Route::get('/userdesk/exitdesk', [DeskController::class, 'exitdesk'])->name('exitdesk');
+
 
 
     Route::get('/dispenser', [DisplayController::class, 'dispenser'])->name('dispenser');

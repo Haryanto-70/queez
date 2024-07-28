@@ -1,5 +1,6 @@
 <script setup>
 import { defineProps, onMounted, ref } from "vue";
+import { Head, router } from "@inertiajs/vue3";
 import ModeButton from "./ModeButton.vue";
 
 axios.defaults.baseURL = "http://127.0.0.1:8000/";
@@ -28,6 +29,7 @@ const getResponse = async (type) => {
         const responses = await axios.get("userdesk");
         users.value = responses.data[0];
         console.log("user data", users.value.queue_no);
+        queueNo.value = users.value.queue_no
     } catch (error) {
         header.value = "ERROR READ DATABASE";
     }
@@ -76,6 +78,17 @@ const getResponse5 = async (type) => {
     }
 };
 
+const getExitDesk = async () => {
+    try {
+          await axios.get("userdesk/exitdesk");
+       // queues.value = responses.data;
+       // console.log("queue data", queues);
+    
+    } catch (error) {
+        header.value = "ERROR READ DATABASE";
+    }
+};
+
 
 
 function serviceList(type){
@@ -99,26 +112,35 @@ function hideSelect(){
 
     selectView.value=!selectView.value
 
+
 }
 
 function finishedQueue(qNo){
     hideSelect();
-      getResponse4(qNo);
-      getResponse();
+   
+     // getResponse();
       getResponse2('all');
     getResponse5(qNo);
+    queueNo.value = "----"
 }
 
+function exitDesk(){
+    console.log('exit desk')
+    router.get("/userdesk/exitdesk");
 
+}
 
 </script>
 
 <template>
-    <div class="bg-[#F3FEB8] h-screen">
+    <div class=" bg-gradient-to-r from-[#4638bd] to-[#070136] h-screen">
+       
         <div class="fixed top-7 flex w-3/4">
+            
             <div class="col col-span-10 flex flex-row ">
+                
                 <div
-                    class="bg-[#FFDE4D] ml-2 mr-2 rounded-lg mb-2 h-32 0 px-6 py-2 border-[#FF4C4C] border-2"
+                    class=" ml-2 mr-2 rounded-lg mb-2 h-32 0 px-6 py-2 bg-[#FFDE4D] border-[#FF4C4C] border-2"
                 >
                     <p
                         class="flex justify-start items-center pt-3 text-cool-gray-800 font-bold text-2xl"
@@ -138,15 +160,15 @@ function finishedQueue(qNo){
                     <p
                         class="font-bold text-7xl flex items-center text-yellow-700 ml-2"
                     >
-                        {{ users.queue_no }}
+                        {{ queueNo }}
                     </p>
                 </div>
             </div>
-            <div v-if="!selectView" class="flex flex-col col-span-2   m-4 fixed right-0 rounded-lg">
+            <div  class="flex flex-col col-span-2   m-4 fixed right-0 bottom-12 rounded-lg">
                 <div class="">
-                    <div class="">
+                    <div v-if="!selectView" class="">
                         <div
-                            class="flex p-4 m-2 text-xl border-2 w-48 mx-2 py-8 rounded-lg border-dark-500 items-center bg-[#FF4C4C] hover:bg-green-700"
+                            class="flex p-4 m-2 text-md border-2 w-48 mx-2 py-2 rounded-lg border-dark-500 items-center bg-[#FF4C4C] hover:bg-green-700"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -165,12 +187,12 @@ function finishedQueue(qNo){
 
                             <div class="flex w-24 ml-2">
                                 <p class="flex text-center font-bold mx-auto text-sky-50">
-                                    NEXT QUEUE
+                                    NEXT QUE
                                 </p>
                             </div>
                         </div>
-                        <div 
-                            class="flex p-4 m-2 text-xl border-2 w-48 mx-2 py-8 rounded-lg border-dark-500 items-center bg-[#FF4C4C] hover:bg-green-700"
+                        <div @click="calling(users.queue_no)"
+                            class="flex p-4 m-2 text-md border-2 w-48 mx-2 py-2 rounded-lg border-dark-500 items-center bg-[#FF4C4C] hover:bg-green-700"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -187,14 +209,14 @@ function finishedQueue(qNo){
                                 />
                             </svg>
 
-                            <div class="flex w-24 ml-2" @click="calling(users.queue_no)"> 
+                            <div class="flex w-24 ml-2" > 
                                 <p class="flex text-center font-bold mx-auto text-sky-50">
                                     CALL
                                 </p>
                             </div>
                         </div>
                         <div
-                            class="flex p-4 m-2 text-xl border-2 w-48 mx-2 py-8 rounded-lg border-dark-500 items-center bg-[#FF4C4C] hover:bg-green-700"
+                            class="flex p-4 m-2 text-md border-2 w-48 mx-2 py-2 rounded-lg border-dark-500 items-center bg-[#FF4C4C] hover:bg-green-700"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -218,7 +240,7 @@ function finishedQueue(qNo){
                             </div>
                         </div>
                         <div
-                            class="flex p-4 m-2 text-xl border-2 w-48 mx-2 py-8 rounded-lg border-dark-500 items-center bg-[#FF4C4C] hover:bg-green-700"
+                            class="flex p-4 m-2 text-md border-2 w-48 mx-2 py-2 rounded-lg border-dark-500 items-center bg-[#FF4C4C] hover:bg-green-700"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -241,8 +263,8 @@ function finishedQueue(qNo){
                                 </p>
                             </div>
                         </div>
-                        <div 
-                            class="flex p-4 m-2 text-xl border-2 w-48 mx-2 py-8 rounded-lg border-dark-500 items-center bg-[#FF4C4C] hover:bg-green-700"
+                        <div @click="finishedQueue(users.queue_no)"
+                            class="flex p-4 m-2 text-md border-2 w-48 mx-2 py-2 rounded-lg border-dark-500 items-center bg-[#FF4C4C] hover:bg-green-700"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -264,14 +286,14 @@ function finishedQueue(qNo){
                                 />
                             </svg>
 
-                            <div  class="flex w-24 ml-2" @click="finishedQueue(users.queue_no)" >
+                            <div  class="flex w-24 ml-2"  >
                                 <p class="flex text-center font-bold mx-auto text-sky-50">
-                                    FINISH
+                                    STOP
                                 </p>
                             </div>
                         </div>
                         <div
-                            class="flex p-4 m-2 text-xl border-2 w-48 mx-2 py-8 rounded-lg border-dark-500 items-center bg-[#FF4C4C] hover:bg-green-700"
+                            class="flex p-4 m-2 text-md border-2 w-48 mx-2 py-2 rounded-lg border-dark-500 items-center bg-[#FF4C4C] hover:bg-green-700"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -294,7 +316,33 @@ function finishedQueue(qNo){
                                 </p>
                             </div>
                         </div>
+            
+                        
                     </div>
+                                  <div v-if="selectView" @click="exitDesk"
+                            class="flex p-4 m-2 text-md border-2 w-48 mx-2 py-2 rounded-lg border-dark-500 items-center bg-[#196a23] hover:bg-green-700"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="size-8 text-sky-50"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                                />
+                            </svg>
+
+                            <div class="flex w-24 ml-2">
+                                <p class="flex text-center font-bold mx-auto text-sky-50">
+                                    EXIT
+                                </p>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>
@@ -307,72 +355,72 @@ function finishedQueue(qNo){
                         @click="serviceList('all')"
                             serviceType="SHOW ALL"
                             description="layanan ini melingkupi semua"
-                            class="bg-[#FFB22C]"
+                            class="bg-[#FFB22C] hover:bg-[#d8a245] hover:text-sky-50"
                         />
                         <ModeButton
                         @click="serviceList('A')"
                             serviceType="LAYANAN A"
                             description="layanan ini melingkupi abscd"
-                            class="bg-[#FFB22C]"
+                            class="bg-[#FFB22C] hover:bg-[#d8a245] hover:text-sky-50"
                         />
                         <ModeButton
                         @click="serviceList('B')"
                             serviceType="LAYANAN B"
                             description="layanan ini melingkupi efgh"
-                            class="bg-[#FFB22C]"
+                            class="bg-[#FFB22C] hover:bg-[#d8a245] hover:text-sky-50"
                         />
                         <ModeButton
                         @click="serviceList('C')"
                             serviceType="LAYANAN C"
                             description="layanan ini melingkupi opkl"
-                            class="bg-[#FFB22C]"
+                            class="bg-[#FFB22C] hover:bg-[#d8a245] hover:text-sky-50"
                         />
                         <ModeButton
                         @click="serviceList('D')"
                             serviceType="LAYANAN D"
                             description="layanan ini melingkupi xyz"
-                            class="bg-[#FFB22C]"
+                            class="bg-[#FFB22C] hover:bg-[#d8a245] hover:text-sky-50"
                         />
                     </div>
                 </div>
             </div>
             <div class="flex">
-                <div>
-                    <table class="table-auto ">
+                <div class="ml-5 mt-8">
+                    <table class="border-separate border-spacing-2 border border-slate-400">
                     <thead>
-                        <tr class="text-cool-gray-800">
-                        <th class="w-12 text-xl ">No</th>
-                        <th class="w-40 text-xl">Queue Number</th>
-                        <th class="w-32 text-xl">Category</th>
-                        <th class="w-32 text-xl">Status</th>              
-                        <th class="w-48 text-xl">Time</th>
-                        <th class="w-48 text-xl">ID</th>
-                        <th class="w-32 text-xl">Action</th>
+                        <tr class="text-gray-300 bg-gray-700 px-3">
+                        <th class="  text-md border border-slate-300 ">No</th>
+                        <th class="  text-md px-3 border border-slate-300">Queue Number</th>
+                        <th class="  text-md px-3 border border-slate-300">Category</th>
+                        <th class="  text-md px-3 border border-slate-300">Status</th>              
+                        <th class="  text-md px-3 border border-slate-300">Time</th>
+                        <th class="  text-md px-3 border border-slate-300">ID</th>
+                        <th class="  text-md px-3 border border-slate-300">Action</th>
                     
                         </tr>
                     </thead>
                     <tbody>
-                         <tr v-for="(item, index) of queues" class="text-lg">
-                            <th scope="row">{{ index + 1 }}</th>
-                            <td>{{ item.queue_no }}</td>
-                            <td class="text-center">
+                         <tr v-for="(item, index) of queues" class="text-xl hover:bg-yellow-500  py-6 text-gray-300 hover:text-gray-700 ">
+                            <th scope="row">{{ index + 1 }}.</th>
+                            <td class="text-center  px-2">{{ item.queue_no }}</td>
+                            <td class="text-center  px-2">
                                 {{ item.service_type }}
                             </td>
-                            <td class="text-center">
+                            <td class="text-center  px-2">
                                 {{ item.status }}
                             </td>
-                            <td class="text-center">
+                            <td class="text-center  px-2">
                                 {{ item.created_at }}
                             </td>
-                            <td class="text-center">
+                            <td class="text-center  px-2">
                                 {{ item.quuid }}
                             </td>
 
-                            <td class="text-center">
+                            <td class="text-center  px-2">
                                 <a v-if="selectView"
                                     @click="say([item.quuid,item.queue_no])"
                                     href="#"
-                                    class="font-medium   text-blue-600 dark:text-blue-500 hover:underline"
+                                    class="font-medium   text-red-700 dark:text-blue-500 hover:underline"
                                     >Select
                                 </a>
                           
