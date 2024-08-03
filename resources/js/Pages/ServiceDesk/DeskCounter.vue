@@ -118,6 +118,13 @@ const getResponseCancel = async (qNo) => {
 const getResponseStart = async (qNo) => {
     try {
         const responses = await axios.put("userdesk/questart/" + qNo);
+        console.log('response start', responses.data)
+
+        if (responses.data >= 1) {
+            status.value = 'started'
+        } else {
+            alert('Wait for Calling Queue Number ')
+        }
         // queues.value = responses.data;
         // console.log("queue data", queues);
 
@@ -210,7 +217,7 @@ function startedQueue(qNo) {
     console.log(status.value)
     if (status.value == 'start') {
         getResponseStart(qNo);
-        status.value = 'started'
+
     } else {
         alert('please start')
     }
@@ -435,7 +442,7 @@ function exitDesk() {
                     </div>
                 </div>
             </div>
-            <div class="flex">
+            <div class="flex bg-gradient-to-r from-[#4638bd] to-[#070136]">
                 <div class="ml-5 mt-8">
                     <table class="border-separate border-spacing-2 border border-slate-400">
                         <thead>

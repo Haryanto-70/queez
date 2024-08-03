@@ -167,6 +167,11 @@ class DeskController extends Controller
         $uid = Auth::user()->id;
         $qNo = $request['qNo'];
 
+        $data = DB::table('queue')
+            ->where('queue_no', $qNo)
+            ->where('user_id', $uid)
+            ->where('status', 'called')
+            ->count();
 
         // dd($uid);
         DB::table('queue')
@@ -180,7 +185,7 @@ class DeskController extends Controller
                 'updated_at' => now(),
             ]);
 
-        //  return response()->json(['status' => 'ok']);
+        return response()->json($data);
     }
     public function finishedqueue(Request $request)
     {
