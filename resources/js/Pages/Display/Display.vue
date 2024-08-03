@@ -16,7 +16,7 @@ const callReady = ref(true);
 const callQueueNo = ref("-911");
 const callDeskNo = ref(5);
 const callQUuid = ref("AXAX");
-const namapt = ref("PT. BANK RAKYAT INDONESIA");
+const namapt = ref("PUSEKSMAS CIBANGKONG BANDUNG");
 const inCounter1 = ref("C001");
 const inCounter2 = ref("A002");
 const inCounter3 = ref("A003");
@@ -403,24 +403,24 @@ function callQueue() {
     setTimeout(function () {
         callSound4.load(); //B
         callSound4.play(); //0
-    }, 7500);
+    }, 7200);
     setTimeout(function () {
         callSound5.load(); //C
         callSound5.play(); //1
-    }, 10000);
+    }, 8400);
     setTimeout(function () {
         callSound6.load(); //D
         callSound6.play(); //2
-    }, 11500);
+    }, 9600);
     setTimeout(function () {
         callSound7.play(); //to
-    }, 13500);
+    }, 10800);
     setTimeout(function () {
         callSound8.play(); //1
-    }, 15800);
+    }, 12800);
     setTimeout(function () {
         callSound9.play(); //closing
-    }, 16500);
+    }, 14000);
     setTimeout(function () {
         callNext(qUuid);
     }, 17000);
@@ -439,56 +439,33 @@ function callQueue() {
         <div class="flex flex-col">
             <div class="flex flex-row justify-between px-5 my-2">
                 <div class="flex flex-row items-center">
-                    <img src="/images/logobri.JPEG" width="100px" alt="" />
+                    <img src="/images/logo-puskesmas.png" width="100px" alt="" />
                     <div>
-                        <p class="text-cool-gray-800 text-2xl font-bold pl-2">
+                        <p class="text-cool-gray-800 text-2xl font-bold font-changa">
                             {{ namapt }}
                         </p>
                     </div>
                 </div>
-                <div
-                    class="text-cool-gray-800 text-2xl font-bold flex items-center"
-                >
+                <div class="text-cool-gray-800 text-2xl font-bold flex items-center">
                     {{ time }}
                 </div>
             </div>
         </div>
         <div class="flex flex-row">
             <div class="">
-                <img
-                    v-if="active1"
-                    src="images/advs/advs1.png"
-                    alt="advertising"
-                    style="width: 5400px; height: 650px"
-                    srcset=""
-                />
-                <img
-                    v-if="active2"
-                    src="images/advs/advs2.png"
-                    alt="advertising"
-                    style="width: 5400px; height: 650px"
-                    srcset=""
-                />
-                <img
-                    v-if="active3"
-                    src="images/advs/advs3.png"
-                    alt="advertising"
-                    style="width: 5400px; height: 650px"
-                    srcset=""
-                />
-                <img
-                    v-if="active4"
-                    src="images/advs/advs4.png"
-                    alt="advertising"
-                    style="width: 5400px; height: 650px"
-                    srcset=""
-                />
+                <img v-if="active1" src="images/advs/advs1.png" alt="advertising" style="width: 5400px; height: 650px"
+                    srcset="" />
+                <img v-if="active2" src="images/advs/advs2.png" alt="advertising" style="width: 5400px; height: 650px"
+                    srcset="" />
+                <img v-if="active3" src="images/advs/advs3.png" alt="advertising" style="width: 5400px; height: 650px"
+                    srcset="" />
+                <img v-if="active4" src="images/advs/advs4.png" alt="advertising" style="width: 5400px; height: 650px"
+                    srcset="" />
             </div>
             <div class="w-full flex flex-col h-full mx-1">
                 <div class="h-1/2">
                     <div
-                        class="w-full bg-[#B60071] flex justify-center text-2xl mb-2 py-3 font-extrabold text-slate-100 rounded-t-lg"
-                    >
+                        class="w-full bg-[#B60071] flex justify-center text-2xl mb-2 py-3 font-extrabold text-slate-100 rounded-t-lg">
                         Customer Service
                     </div>
                     <div class="flex flex-col">
@@ -501,8 +478,7 @@ function callQueue() {
                 </div>
                 <div class="h-48">
                     <div
-                        class="w-full bg-[#B60071] flex justify-center text-2xl mb-2 py-3 font-extrabold text-slate-100 rounded-t-lg"
-                    >
+                        class="w-full bg-[#B60071] flex justify-center text-2xl mb-2 py-3 font-extrabold text-slate-100 rounded-t-lg">
                         Special Transaction
                     </div>
                     <div class="flex flex-col">
@@ -516,53 +492,26 @@ function callQueue() {
         </div>
         <div class="flex flex-row justify-around items-center h-40">
             <div>
-                <Counter
-                    cNo="01"
-                    :inService="inCounter1"
-                    class="bg-[#FF4C4C]"
-                />
+                <Counter cNo="01" :inService="inCounter1" class="bg-[#FF4C4C]" />
             </div>
             <div>
-                <Counter
-                    cNo="02"
-                    :inService="inCounter2"
-                    class="bg-[#FFB22C]"
-                />
+                <Counter cNo="02" :inService="inCounter2" class="bg-[#FFB22C]" />
             </div>
             <div>
-                <Counter
-                    cNo="03"
-                    :inService="inCounter3"
-                    class="bg-[#FFDE4D]"
-                />
+                <Counter cNo="03" :inService="inCounter3" class="bg-[#FFDE4D]" />
             </div>
             <div>
-                <Counter
-                    cNo="04"
-                    :inService="inCounter4"
-                    class="bg-[#F3FEB8]"
-                />
+                <Counter cNo="04" :inService="inCounter4" class="bg-[#F3FEB8]" />
             </div>
             <div>
-                <Counter
-                    cNo="05"
-                    :inService="inCounter5"
-                    class="bg-[#73BBA3]"
-                />
+                <Counter cNo="05" :inService="inCounter5" class="bg-[#73BBA3]" />
             </div>
             <div>
-                <Counter
-                    @click="callQueue"
-                    cNo="06"
-                    :inService="inCounter6"
-                    class="bg-[#F6FB7A]"
-                />
+                <Counter @click="callQueue" cNo="06" :inService="inCounter6" class="bg-[#F6FB7A]" />
             </div>
         </div>
-        <div
-            v-if="toggle"
-            class="fixed top-1/2 left-1/3 bg-slate-800 p-5 rounded-md border-light-100 border-2 shadow-yellow-500 hover:bg-red-500"
-        >
+        <div v-if="toggle"
+            class="fixed top-1/2 left-1/3 bg-slate-800 p-5 rounded-md border-light-100 border-2 shadow-yellow-500 hover:bg-red-500">
             <div @click="toggle = !toggle" class="text-white">
                 <h1>OPEN QUEUEING DSIPLAY CONFIRMED ?</h1>
                 <h1>Click here !!</h1>

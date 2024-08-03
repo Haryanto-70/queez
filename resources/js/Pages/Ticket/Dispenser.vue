@@ -6,7 +6,7 @@ const queueNo = ref();
 const queue = ref([]);
 const queprint = ref(true);
 
-onMounted(() => {});
+onMounted(() => { });
 
 const getResponse = async (sId) => {
     queueprint();
@@ -43,14 +43,8 @@ function queueprint() {
 
 <template>
     <div class="flex justify-center min-h-svh items-center">
-        <img
-            id="background"
-            class="absolute w-screen -z-10"
-            src="images/dispenser.png"
-        />
-        <div
-            class="flex-col bg-[#2a6fa0] w-2/5 rounded-xl shadow-lg shadow-[#698aa1]"
-        >
+        <img id="background" class="absolute w-screen -z-10" src="images/dispenser.png" />
+        <div class="flex-col bg-[#2a6fa0] w-2/5 rounded-xl shadow-lg shadow-[#698aa1]">
             <h1 class="text-center text-2xl py-3 text-slate-200 font-sans">
                 TICKETING SYSTEM
             </h1>
@@ -60,46 +54,27 @@ function queueprint() {
                 </h1>
 
                 <div class="mt-4">
-                    <CardButton
-                        class="mb-8"
-                        @click="layananA"
-                        serviceType="LAYANAN A"
-                        desciption="layanan ini melingkupi abscd"
-                    />
-                    <CardButton
-                        class="mb-8"
-                        @click="layananB"
-                        serviceType="LAYANAN B"
-                        desciption="layanan ini melingkupi efgh"
-                    />
-                    <CardButton
-                        class="mb-8"
-                        @click="layananC"
-                        serviceType="LAYANAN C"
-                        desciption="layanan ini melingkupi opkl"
-                    />
-                    <CardButton
-                        class="mb-8"
-                        @click="layananD"
-                        serviceType="LAYANAN D"
-                        desciption="layanan ini melingkupi xyz"
-                    />
+                    <CardButton class="mb-8" @click="layananA" serviceType="LAYANAN A"
+                        desciption="Layanan Rawat Inap,Rawat Jalan,Bedah,UGD " />
+                    <CardButton class="mb-8" @click="layananB" serviceType="LAYANAN B"
+                        desciption="Layanan Laboratorium,Layanan Radiologi" />
+                    <CardButton class="mb-8" @click="layananC" serviceType="LAYANAN C"
+                        desciption="Layanan Rehabilitasi,Layanan Psikologi/Psikiatri" />
+                    <CardButton class="mb-8" @click="layananD" serviceType="LAYANAN D"
+                        desciption="Layanan Farmasi,Layanan Gizi" />
                 </div>
             </div>
 
-            <div
-                class="flex-col justify-center bg-green-400 py-12"
-                v-if="!queprint"
-            >
-                <div class="text-center"><h1>NO ANTRIAN ANDA</h1></div>
+            <div class="flex-col justify-center bg-green-400 py-12" v-if="!queprint">
+                <div class="text-center">
+                    <h1>NO ANTRIAN ANDA</h1>
+                </div>
                 <div class="text-7xl font-bold text-center">
                     {{ queue.queue_no }}
                 </div>
                 <div class="text-center pt-8">SILAHKAN MENUNGGU</div>
-                <div
-                    @click="queueprint"
-                    class="text-center bg-red-700 hover:bg-red-500 text-sky-100 mx-auto w-40 mt-4 text-4xl p-2"
-                >
+                <div @click="queueprint"
+                    class="text-center bg-red-700 hover:bg-red-500 text-sky-100 mx-auto w-40 mt-4 text-4xl p-2">
                     <h2>CETAK</h2>
                 </div>
             </div>

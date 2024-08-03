@@ -283,31 +283,33 @@ function exitDesk() {
 </script>
 
 <template>
-    <div class=" bg-gradient-to-r from-[#4638bd] to-[#070136] h-screen">
+    <div class="bg-[#161649] h-screen">
 
         <div class="fixed top-7 flex w-3/4">
 
             <div class="col col-span-10 flex flex-row ">
 
-                <div class=" ml-2 mr-2 rounded-lg mb-2 h-32 0 px-6 py-2 bg-[#FFDE4D] border-[#FF4C4C] border-2">
-                    <p class="flex justify-start items-center pt-3 text-cool-gray-800 font-bold text-2xl">
+                <div class=" ml-2 mr-2 rounded-lg mb-2 h-32 0 px-6 py-2 bg-[#FFDE4D] border-[#2b2a2a] border-2">
+                    <p class="flex justify-start items-center pt-3 text-gray-700 font-bold text-2xl">
                         DESK COUNTER:
                     <p class="text-yellow-700 mx-auto">{{ users.desk_no }} </p>
                     </p>
-                    <p class="flex justify-start items-center pt-3 text-cool-gray-800 font-bold text-2xl">
+                    <p class="flex justify-start items-center pt-3 text-gray-700 font-bold text-2xl">
                         USER NAME :
                     <p class="text-yellow-700">{{ users.name }}</p>
                     </p>
                 </div>
                 <div
-                    class="flex flex-col   items-center p-4 text-xl border-2 w-80 h-32 rounded-lg border-dark-500 bg-[#FFDE4D] border-[#FF4C4C]">
+                    class="flex flex-col text-gray-700  items-center p-4 text-xl border-2 w-80 h-32 rounded-lg border-dark-500 bg-[#FFDE4D] border-[#2b2a2a]">
                     <p class="flex items-center">QUEUE NUMBER :</p>
                     <p class="font-bold text-7xl flex items-center text-yellow-700 ml-2">
                         {{ queueNo }}
                     </p>
                 </div>
-                <div>
-                    <p>Status : {{ status }}</p>
+                <div
+                    class="flex flex-col text-gray-700 items-center p-4 text-xl border-2 w-80 h-32 rounded-lg border-dark-500 bg-[#FFDE4D] border-[#2b2a2a]">
+                    <p>STATUS </p>
+                    <p class="font-bold text-4xl pt-2 flex text-yellow-700 ml-2"> {{ status.toUpperCase() }}</p>
                 </div>
             </div>
             <div class="flex flex-col col-span-2   m-4 fixed right-0 bottom-12 rounded-lg">
@@ -442,7 +444,7 @@ function exitDesk() {
                     </div>
                 </div>
             </div>
-            <div class="flex bg-gradient-to-r from-[#4638bd] to-[#070136]">
+            <div class="flex  bg-[#161649]">
                 <div class="ml-5 mt-8">
                     <table class="border-separate border-spacing-2 border border-slate-400">
                         <thead>

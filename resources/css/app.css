@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "Changa";
+  src: url("/fonts/Changa/Changa-VariableFont_wght.ttf");
+}
+@font-face {
+  font-family: "Russo";
+  src: url("/fonts/Russo_One/RussoOne-Regular.ttf");
+}
+@font-face {
+  font-family: "Dosis";
+  src: url("/fonts/Dosis/Dosis-VariableFont_wght.ttf");
+}
+@font-face {
+  font-family: "Josefin";
+  src: url("/fonts/Josefin_Sans/JosefinSans-VariableFont_wght.ttf");
+}
+@font-face {
+  font-family: "Lastica";
+  src: url("/fonts/Lastica/FontsFree-Net-Lastica.ttf");
+}
