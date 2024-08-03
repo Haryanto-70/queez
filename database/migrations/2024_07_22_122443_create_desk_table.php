@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('desk_no');
             $table->string('queue_no')->default('----');
             $table->string('status')->default('inservice');
-            $table->time('end_service')->nullable();
+            $table->timestamp('end_service')->nullable();
             $table->timestamps();
         });
     }

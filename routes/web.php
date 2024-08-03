@@ -43,11 +43,14 @@ Route::middleware('auth')->group(function () {
     Route::put('/userdesk/calling/{qNo}', [DeskController::class, 'callqueue'])->name('callqueue');
     Route::put('/userdesk/finished/{qNo}', [DeskController::class, 'finishedqueue'])->name('finishedqueue');
     Route::get('/userdesk/exitdesk', [DeskController::class, 'exitdesk'])->name('exitdesk');
+    Route::put('/userdesk/quecancel/{qNo}', [DeskController::class, 'quecancel'])->name('quecancel');
+    Route::put('/userdesk/questart/{qNo}', [DeskController::class, 'startqueue'])->name('startqueue');
 
 
 
     Route::get('/dispenser', [DisplayController::class, 'dispenser'])->name('dispenser');
     Route::put('/queue/{sId}', [DisplayController::class, 'queue'])->name('queue');
+
     Route::put('/queue/next/{qId}', [DisplayController::class, 'callnext'])->name('callnext');
 });
 

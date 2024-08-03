@@ -47,6 +47,31 @@ class DeskController extends Controller
     public function userdesk(Request $request)
     {
         $uid = Auth::user()->id;
+
+
+        $statusQueue = DB::table('queue')
+            ->where('user_id', $uid)
+            ->whereNotIn('status', ['finished', 'canceled'])
+            ->get();
+
+        if ($statusQueue->count() >= 1) {
+            foreach ($statusQueue as $statusQ) {
+
+                $statusQNo = $statusQ->queue_no;
+                $syncDesk = DB::table('desk')
+                    ->where('queue_no', $statusQNo)
+                    ->get();
+                if ($syncDesk->count() == 0) {
+                    DB::table('desk')
+                        ->where('user_id', $uid)
+                        ->update([
+                            'queue_no' => $statusQNo,
+                            'updated_at' => now(),
+                        ]);
+                }
+            }
+        }
+
         $data = DB::table('desk')
             ->where('user_id', $uid)
             ->join('users', 'users.id', 'desk.user_id')
@@ -106,7 +131,10 @@ class DeskController extends Controller
         DB::table('desk')
             ->where('user_id', $uid)
             ->where('status', 'inservice')
-            ->update(['queue_no' => $data[0]->queue_no]);
+            ->update([
+                'queue_no' => $data[0]->queue_no,
+                'updated_at' => now(),
+            ]);
 
 
         //  return response()->json(['status' => 'ok']);
@@ -128,7 +156,28 @@ class DeskController extends Controller
             ->whereIn('status', ['new', 'pending'])
             ->update([
                 'status' => 'call',
-                'in_counter' => $data[0]->desk_no
+                'in_counter' => $data[0]->desk_no,
+                'updated_at' => now(),
+            ]);
+
+        //  return response()->json(['status' => 'ok']);
+    }
+    public function startqueue(Request $request)
+    {
+        $uid = Auth::user()->id;
+        $qNo = $request['qNo'];
+
+
+        // dd($uid);
+        DB::table('queue')
+            ->where('queue_no', $qNo)
+            ->where('user_id', $uid)
+            ->where('status', 'called')
+            ->whereIn('status', ['called', 'pending'])
+            ->update([
+                'status' => 'started',
+                'started_at' => now(),
+                'updated_at' => now(),
             ]);
 
         //  return response()->json(['status' => 'ok']);
@@ -141,16 +190,43 @@ class DeskController extends Controller
         // dd($uid);
         DB::table('queue')
             ->where('queue_no', $qNo)
-            ->whereIn('status', ['called', 'pending'])
+            ->where('user_id', $uid)
+            ->whereIn('status', ['started', 'pending'])
             ->update([
                 'status' => 'finished',
                 'in_counter' => 0,
+                'finished_at' => now(),
+                'updated_at' => now(),
             ]);
+
         DB::table('desk')
             ->where('user_id', $uid)
             ->where('queue_no', $qNo)
-            ->update(['queue_no' => '----']);
+            ->update([
+                'queue_no' => '----',
+                'updated_at' => now(),
+            ]);
+        //  convert to second in duration
 
+        $timeDiff = DB::table('queue')
+            ->where('queue_no', $qNo)
+            ->where('user_id', $uid)
+            ->where('status', 'finished')
+            ->select('started_at', 'finished_at')
+            ->get();
+
+        //   $duration = now() - $startTime;
+        $epochStart = strtotime($timeDiff[0]->started_at);
+        $epochFinish = strtotime($timeDiff[0]->finished_at);
+        $diffTime = $epochFinish - $epochStart;
+
+        DB::table('queue')
+            ->where('queue_no', $qNo)
+            ->where('user_id', $uid)
+            ->where('status', 'finished')
+            ->update([
+                'duration' => $diffTime,
+            ]);
 
 
         //  return response()->json(['status' => 'ok']);
@@ -168,5 +244,21 @@ class DeskController extends Controller
 
 
         return redirect()->intended(route('dashboard', absolute: false));
+    }
+
+    public function quecancel(Request $request)
+    {
+
+        $uid = Auth::user()->id;
+        $qNo = $request['qNo'];
+        // dd('exit desk', $uid);
+        DB::table('queue')
+            ->where('user_id', $uid)
+            ->where('queue_no', $qNo)
+            ->update([
+                'status' => 'new',
+                'in_counter' => 0,
+                'user_id' => null
+            ]);
     }
 }

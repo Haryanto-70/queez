@@ -26,13 +26,13 @@ return new class extends Migration
             /** service counter number */
             $table->integer('user_id')->nullable();
             /** service counter number */
-            $table->time('started_at')->nullable();
+            $table->timestamp('started_at')->nullable();
             /** inservice started  */
-            $table->time('finished_at')->nullable();
+            $table->timestamp('finished_at')->nullable();
             /** inservice finished */
-            $table->time('pending_at')->nullable();
+            $table->timestamp('pending_at')->nullable();
             /**pending started */
-            $table->time('resume_at')->nullable();
+            $table->timestamp('resume_at')->nullable();
             /** pending finished  calculate duration   */
             $table->bigInteger('duration')->nullable();
             $table->timestamps();
