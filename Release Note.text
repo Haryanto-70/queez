@@ -1,0 +1,17 @@
+Release Note:
+
+Revision 1
+latest Revision : 6 Aug 2024 18:30 
+
+need Development:
+- Role Policy
+- Multi Company
+- Performance Report
+
+Bug
+- 6 Aug 2024 : 
+    Add Role : Admin, CS, Supervisor,  Superuser
+                CS-1 : Front Office Cat 1
+                CS-2 : Front Office Cat 2
+                Supervisor : Manage User Assignment, Plus Reporting
+                Admin : User Approval Assignment
