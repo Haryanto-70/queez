@@ -59,9 +59,7 @@ const toggle = ref(true);
 
 onMounted(() => {
     getResponse();
-    // getAdvs();
-    // getQueue();
-    // getTime();
+
 });
 
 const getResponse = async () => {
@@ -150,7 +148,7 @@ onUnmounted(() => {
     clearInterval(getQueue);
     clearInterval(getTime);
     clearInterval(getAdvs);
-    //   console.log("on Unmounted");
+
 });
 
 function onDisplay() {
@@ -163,7 +161,7 @@ const callNext = async (qUuid) => {
         callDeskNo.value = 0;
         callQueueNo.value = "----";
         console.log(responses.data);
-        //change ready here for next call
+
 
         callReady.value = true;
     } catch (error) {
@@ -193,8 +191,7 @@ function callQueue() {
         return;
     }
 
-    //  callReady.value = false;
-    //  console.log(char1, char2, char3, char4);
+
     const callSound1 = soundAttention;
     const callSound2 = soundQueNo;
     let callSound3 = sound_A;
@@ -389,7 +386,7 @@ function callQueue() {
 
     console.log("Call Ready Status", callReady.value);
 
-    // toggle.value = !toggle.value;
+
 
     callSound1.play(); // login
     setTimeout(function () {
@@ -425,12 +422,7 @@ function callQueue() {
         callNext(qUuid);
     }, 17000);
 
-    // onMounted(() => {
-    //   //  getResponse();
-    //     // getAdvs();
-    //     // getQueue();
-    //     // getTime();
-    // });
+
 }
 </script>
 
