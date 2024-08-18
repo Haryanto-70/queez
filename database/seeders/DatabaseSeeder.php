@@ -36,6 +36,24 @@ class DatabaseSeeder extends Seeder
 
             ],
             [
+                'name' => 'Dashboard Dispencer',
+                'email' => 'disdi@gmail.com',
+                'role' => 'c4c472fe-4a3e-8d7c-326d-2779c0170f38',
+                'company' => 'guest',
+                'active' => true,
+                'password' => bcrypt('bakti123'),
+
+            ],
+            [
+                'name' => 'Dispencer',
+                'email' => 'dispen@gmail.com',
+                'role' => 'a99e3b4d-54fd-6e51-5a2f-4ed7f06f6582',
+                'company' => 'guest',
+                'active' => true,
+                'password' => bcrypt('bakti123'),
+
+            ],
+            [
                 'name' => 'Customer Service 1',
                 'email' => 'cs1@gmail.com',
                 'role' => '67B43821-A364-9FDD-2EB2-5F8259936CF5',
@@ -74,11 +92,11 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Guest',
-                'email' => 'guest@gmail.com',
-                'role' => 'A99E3B4D-54FD-6E51-5A2F-4ED7F06F6582',
+                'email' => 'guest@quenet.com',
+                'role' => 'c4c472fe-4a3e-8d7c-326d-2779c0170f38',  // equal to display and dispencer
                 'company' => 'trial',
                 'active' => true,
-                'password' => bcrypt('bakti123'),
+                'password' => bcrypt('quenet'),
 
             ],
 

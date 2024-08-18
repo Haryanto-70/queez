@@ -17,4 +17,10 @@ Bug
                 Admin : User Approval Assignment
     using users table dan roles table, for limit access and multicompany
 
+- 18 Aug 2024:
     use company nama for create and list in desk
+    access to display and dispencer based on user role.
+    desk list based on company
+
+- 18 Active users    
+

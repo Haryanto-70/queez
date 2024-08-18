@@ -31,7 +31,14 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        if (!Auth::user()->active) {
+            Auth::guard('web')->logout();
+
+            return redirect()->intended(route('error404', absolute: false));
+        }
+
         $request->session()->regenerate();
+
 
         return redirect()->intended(route('dashboard', absolute: false));
     }

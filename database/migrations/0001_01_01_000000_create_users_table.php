@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->uuid('role')->default('C28CF263-20A5-32E7-379A-B7561DE267FB');
+            $table->uuid('role')->default('c4c472fe-4a3e-8d7c-326d-2779c0170f38');
             $table->string('company')->default('trial');
             $table->boolean('active')->default(false);
             $table->timestamp('email_verified_at')->nullable();
