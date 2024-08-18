@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('role')->default('display');
+            $table->uuid('role')->default('C28CF263-20A5-32E7-379A-B7561DE267FB');
+            $table->string('company')->default('trial');
+            $table->boolean('active')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

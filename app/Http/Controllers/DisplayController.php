@@ -21,14 +21,20 @@ class DisplayController extends Controller
     //
     public function display(): Response
     {
-
-        return Inertia::render('Display/Display');
+        $role = Auth::user()->role;
+        if ($role == '6ce8bcba-7030-360a-7c19-8709c47179e6'  || $role == 'c9e11b93-7cee-3c3f-175e-ac6476ca34e0' || $role == 'c4c472fe-4a3e-8d7c-326d-2779c0170f38') {
+            return Inertia::render('Display/Display');
+        }
+        return Inertia::render('Error/401');
     }
 
     public function displayqueue(Request $request)
     {
         //  dd('test point');
+        $company = Auth::user()->company;
+
         $dataAC = DB::table('queue')
+            ->where('company', $company)
             ->whereIn('service_type', ['A', 'C'])
             ->where('status', 'new')
             ->select('queue_no', 'status')
@@ -37,6 +43,7 @@ class DisplayController extends Controller
             ->get();
 
         $count = $dataAC->count();
+
 
         //  dd($count, $dataAC);
 
@@ -92,6 +99,7 @@ class DisplayController extends Controller
         //        dd($cs1, $cs2, $cs3, $cs4, $cs5);
 
         $dataBD = DB::table('queue')
+            ->where('company', $company)
             ->whereIn('service_type', ['B', 'D'])
             ->where('status', 'new')
             ->select('queue_no', 'status')
@@ -129,6 +137,7 @@ class DisplayController extends Controller
         //  dd($cs1, $cs2, $cs3, $cs4, $cs5, $cs6, $cs7, $cs8, $cs9, $cs10, $status1, $status2, $status3, $status4, $status5, $status6, $status7, $status8, $status9, $status10);
 
         $dataCall = DB::table('queue')
+            ->where('company', $company)
             ->where('status', 'call')
             ->orderBy('created_at')
             ->limit(1)
@@ -145,6 +154,7 @@ class DisplayController extends Controller
         // dd($dataCall);
 
         $qNoCounter1 = DB::table('queue')
+            ->where('company', $company)
             ->where('status', '<>', 'closed')
             ->where('in_counter', 1)
             ->orderBy('created_at')
@@ -153,6 +163,7 @@ class DisplayController extends Controller
             ->get();
 
         $qNoCounter2 = DB::table('queue')
+            ->where('company', $company)
             ->where('status', '<>', 'closed')
             ->where('in_counter', 2)
             ->orderBy('created_at')
@@ -160,6 +171,7 @@ class DisplayController extends Controller
             ->limit(1)
             ->get();
         $qNoCounter3 = DB::table('queue')
+            ->where('company', $company)
             ->where('status', '<>', 'closed')
             ->where('in_counter', 3)
             ->orderBy('created_at')
@@ -167,6 +179,7 @@ class DisplayController extends Controller
             ->limit(1)
             ->get();
         $qNoCounter4 = DB::table('queue')
+            ->where('company', $company)
             ->where('status', '<>', 'closed')
             ->where('in_counter', 4)
             ->orderBy('created_at')
@@ -174,6 +187,7 @@ class DisplayController extends Controller
             ->limit(1)
             ->get();
         $qNoCounter5 = DB::table('queue')
+            ->where('company', $company)
             ->where('status', '<>', 'closed')
             ->where('in_counter', 5)
             ->orderBy('created_at')
@@ -181,6 +195,7 @@ class DisplayController extends Controller
             ->limit(1)
             ->get();
         $qNoCounter6 = DB::table('queue')
+            ->where('company', $company)
             ->where('status', '<>', 'closed')
             ->where('in_counter', 6)
             ->orderBy('created_at')
@@ -224,6 +239,7 @@ class DisplayController extends Controller
         //  dd($qNoCounter6[0]);
 
         $data = DB::table('queue')
+            ->where('company', $company)
             ->whereIn('status', ['call', 'recall'])
             ->orderBy("created_at")
             ->select('quuid', 'queue_no', 'in_counter')
@@ -281,7 +297,11 @@ class DisplayController extends Controller
     public function dispenser(): Response
     {
 
-        return Inertia::render('Ticket/Dispenser');
+        $role = Auth::user()->role;
+        if ($role == '6ce8bcba-7030-360a-7c19-8709c47179e6'  || $role == 'a99e3b4d-54fd-6e51-5a2f-4ed7f06f6582' || $role == 'c4c472fe-4a3e-8d7c-326d-2779c0170f38') {
+            return Inertia::render('Ticket/Dispenser');
+        }
+        return Inertia::render('Error/401');
     }
 
     public function queue(Request $request)
@@ -289,7 +309,9 @@ class DisplayController extends Controller
 
         $sId = $request['sId'];
         // dd('test point', $sId);
+        $company = Auth::user()->company;
         $data = DB::table('queue')
+            ->where('company', $company)
             ->where('service_type', '=', $sId)
             ->get();
 
@@ -306,8 +328,11 @@ class DisplayController extends Controller
 
         $queueNo = $queueId . "" . "$count";
         //dd($queueNo, $sId, $count);
+
+        //dd('company', $company);
         DB::table('queue')
             ->insert([
+                'company' => $company,
                 'quuid' => Str::uuid(),
                 'service_type' => $sId,
                 'queue_id' => $count,
@@ -317,6 +342,7 @@ class DisplayController extends Controller
             ]);
 
         $data = DB::table('queue')
+            ->where('company', $company)
             ->where('service_type', '=', $sId)
             ->where('queue_no', '=', $queueNo)
             ->where('status', '=', 'new')
@@ -335,9 +361,11 @@ class DisplayController extends Controller
     {
 
         $qUuid = $request['qId'];
+        $company = Auth::user()->company;
 
         //  dd($qUuid);
         DB::table('queue')
+            ->where('company', $company)
             ->where('quuid', $qUuid)
             ->update([
                 'status' => 'called',

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('queue', function (Blueprint $table) {
             $table->id();
+            $table->string('company')->default('trial');
             $table->uuid('quuid');
             $table->string('service_type');
             /** A B C D */

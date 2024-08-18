@@ -24,7 +24,9 @@ class DeskController extends Controller
         $uid = Auth::user()->id;
 
 
+
         $data = DB::table('desk')
+
             ->where('user_id', '=', $uid)
             ->where('status', '=', 'inservice')
             ->get();
@@ -41,15 +43,21 @@ class DeskController extends Controller
                 ]);
         } else {
         }
+
+        $role = Auth::user()->role;
+        if ($role == 'c9e11b93-7cee-3c3f-175e-ac6476ca34e0' || $role == 'a99e3b4d-54fd-6e51-5a2f-4ed7f06f6582' || $role == 'c4c472fe-4a3e-8d7c-326d-2779c0170f38') {
+            return Inertia::render('Error/401');
+        }
         return Inertia::render('ServiceDesk/DeskCounter');
     }
 
     public function userdesk(Request $request)
     {
         $uid = Auth::user()->id;
-
+        $company = Auth::user()->company;
 
         $statusQueue = DB::table('queue')
+            ->where('company', $company)
             ->where('user_id', $uid)
             ->whereNotIn('status', ['finished', 'canceled'])
             ->get();
@@ -85,10 +93,12 @@ class DeskController extends Controller
     {
         $uid = Auth::user()->id;
         $type = request('type');
+        $company = Auth::user()->company;
         // dd($type);
 
         if ($type == 'all') {
             $data = DB::table('queue')
+                ->where('company', $company)
                 ->whereIn('status', ['new', 'pending'])
                 ->where('in_counter', 0)
                 ->orderBy('service_type')
@@ -98,6 +108,7 @@ class DeskController extends Controller
                 ->get();
         } else {
             $data = DB::table('queue')
+                ->where('company', $company)
                 ->whereIn('status', ['new', 'pending'])
                 ->where('service_type', $type)
                 ->where('in_counter', 0)
@@ -116,8 +127,10 @@ class DeskController extends Controller
     {
         $uid = Auth::user()->id;
         $qUuid = $request['quuid'];
+        $company = Auth::user()->company;
         //  dd($qUuid);
         $data = DB::table('queue')
+            ->where('company', $company)
             ->where('quuid', $qUuid)
             ->select('queue_no')
             ->get();
@@ -125,6 +138,7 @@ class DeskController extends Controller
         // dd(($data[0]->queue_no));
 
         DB::table('queue')
+            ->where('company', $company)
             ->where('quuid', $qUuid)
             ->update(['user_id' => $uid]);
 
@@ -144,6 +158,7 @@ class DeskController extends Controller
     {
         $uid = Auth::user()->id;
         $qNo = $request['qNo'];
+        $company = Auth::user()->company;
         $data = DB::table('desk')
             ->where('user_id', $uid)
             ->where('status', 'inservice')
@@ -152,6 +167,7 @@ class DeskController extends Controller
 
         // dd($uid);
         DB::table('queue')
+            ->where('company', $company)
             ->where('queue_no', $qNo)
             ->whereIn('status', ['new', 'pending'])
             ->update([
@@ -166,8 +182,10 @@ class DeskController extends Controller
     {
         $uid = Auth::user()->id;
         $qNo = $request['qNo'];
+        $company = Auth::user()->company;
 
         $data = DB::table('queue')
+            ->where('company', $company)
             ->where('queue_no', $qNo)
             ->where('user_id', $uid)
             ->where('status', 'called')
@@ -175,6 +193,7 @@ class DeskController extends Controller
 
         // dd($uid);
         DB::table('queue')
+            ->where('company', $company)
             ->where('queue_no', $qNo)
             ->where('user_id', $uid)
             ->where('status', 'called')
@@ -191,9 +210,11 @@ class DeskController extends Controller
     {
         $uid = Auth::user()->id;
         $qNo = $request['qNo'];
+        $company = Auth::user()->company;
 
         // dd($uid);
         DB::table('queue')
+            ->where('company', $company)
             ->where('queue_no', $qNo)
             ->where('user_id', $uid)
             ->whereIn('status', ['started', 'pending'])
@@ -214,6 +235,7 @@ class DeskController extends Controller
         //  convert to second in duration
 
         $timeDiff = DB::table('queue')
+            ->where('company', $company)
             ->where('queue_no', $qNo)
             ->where('user_id', $uid)
             ->where('status', 'finished')
@@ -226,6 +248,7 @@ class DeskController extends Controller
         $diffTime = $epochFinish - $epochStart;
 
         DB::table('queue')
+            ->where('company', $company)
             ->where('queue_no', $qNo)
             ->where('user_id', $uid)
             ->where('status', 'finished')
@@ -256,8 +279,10 @@ class DeskController extends Controller
 
         $uid = Auth::user()->id;
         $qNo = $request['qNo'];
+        $company = $request['company'];
         // dd('exit desk', $uid);
         DB::table('queue')
+            ->where('company', $company)
             ->where('user_id', $uid)
             ->where('queue_no', $qNo)
             ->update([

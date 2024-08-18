@@ -15,3 +15,6 @@ Bug
                 CS-2 : Front Office Cat 2
                 Supervisor : Manage User Assignment, Plus Reporting
                 Admin : User Approval Assignment
+    using users table dan roles table, for limit access and multicompany
+
+    use company nama for create and list in desk
