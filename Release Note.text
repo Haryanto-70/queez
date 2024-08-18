@@ -22,5 +22,8 @@ Bug
     access to display and dispencer based on user role.
     desk list based on company
 
-- 18 Active users    
+- 18 Active users  
+    only active user can access and trial login use guest as in login view
+
+
 
