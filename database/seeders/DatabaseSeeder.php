@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Dispencer;
+
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -229,12 +231,46 @@ class DatabaseSeeder extends Seeder
 
         ];
 
+        $dispencers = [
+            [
+                'company' => 'trial',
+                'service_list' => 'layanan1',
+                'name' => 'LAYANAN A',
+                'detail' => 'Layanan Rawat Inap,Rawat Jalan,Bedah,UGD',
+                'order_list' => 1,
+            ],
+            [
+                'company' => 'trial',
+                'service_list' => 'layanan2',
+                'name' => 'LAYANAN B',
+                'detail' => 'Layanan Laboratorium,Layanan Radiologi',
+                'order_list' => 2,
+            ],
+            [
+                'company' => 'trial',
+                'service_list' => 'layanan3',
+                'name' => 'LAYANAN C',
+                'detail' => 'Layanan Rehabilitasi,Layanan Psikologi/Psikiatri',
+                'order_list' => 3,
+            ],
+            [
+                'company' => 'trial',
+                'service_list' => 'layanan4',
+                'name' => 'LAYANAN D',
+                'detail' => 'Layanan Farmasi,Layanan Gizi',
+                'order_list' => 4,
+            ],
+        ];
+
         foreach ($users as $user) (
             User::insert($user)
         );
 
         foreach ($roles as $role) (
             Role::insert($role)
+        );
+        foreach ($dispencers as $dispencer) (
+            Dispencer::insert($dispencer)
         );
     }
 }

@@ -304,6 +304,23 @@ class DisplayController extends Controller
         return Inertia::render('Error/401');
     }
 
+    public function dispencers(Request $request)
+    {
+        $company = Auth::user()->company;
+        if ($company == 'alkemi') {
+            $company = 'trial';
+        }
+
+        $data = DB::table('dispencers')
+            ->where('company', $company)
+            ->orderBy('order_list')
+            ->limit(4)
+            ->select('service_list', 'order_list', 'name', 'detail')
+            ->get();
+
+        return response()->json($data);
+    }
+
     public function queue(Request $request)
     {
 

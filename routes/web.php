@@ -52,6 +52,8 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/dispenser', [DisplayController::class, 'dispenser'])->name('dispenser');
+    Route::get('/dispencers', [DisplayController::class, 'dispencers'])->name('dispencers');
+
     Route::put('/queue/{sId}', [DisplayController::class, 'queue'])->name('queue');
 
     Route::put('/queue/next/{qId}', [DisplayController::class, 'callnext'])->name('callnext');
