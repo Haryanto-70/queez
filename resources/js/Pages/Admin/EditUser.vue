@@ -11,6 +11,8 @@ const form = useForm({
     status: false,
 
 });
+const selected = ref('')
+const roles = ref([])
 
 const props = defineProps(['name', 'email', 'role', 'active'])
 
@@ -20,13 +22,25 @@ onMounted(() => {
     form.role = props.role
     form.status = props.active
 
-    console.log(props)
+
+    roleList();
 
 })
 
 const updateUserForm = async ($data) => {
 
-    router.post("/edituser/" + $data, form);
+    if ($data == "") {
+
+        router.post("/edituser/" + 'nonewrole', form);
+    } else {
+        router.post("/edituser/" + $data, form);
+    }
+}
+
+
+const roleList = async () => {
+    const responses = await axios.get("roleslist");
+    roles.value = responses.data;
 
 }
 
@@ -34,10 +48,10 @@ const updateUserForm = async ($data) => {
 
 <template>
     <div class="ml-4">
-        <form @submit.prevent="updateUserForm('update')">
-            <div class="sm:col-span-4">
+        <form @submit.prevent="updateUserForm(selected)">
+            <div class="sm:col-span-4 mt-2">
                 <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
-                <div class="mt-2">
+                <div class="">
                     <div
                         class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
 
@@ -48,9 +62,9 @@ const updateUserForm = async ($data) => {
                     </div>
                 </div>
             </div>
-            <div class="sm:col-span-4">
+            <div class="sm:col-span-4 mt-2">
                 <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
-                <div class="mt-2">
+                <div class="">
                     <div
                         class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                         <input disabled v-model="form.email" type="email" name="username" id="username"
@@ -62,14 +76,44 @@ const updateUserForm = async ($data) => {
             </div>
 
             <div class="sm:col-span-4">
-                <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Role</label>
-                <div class="mt-2">
-                    <div
-                        class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                        <input v-model="form.role" type="text" name="username" id="username" autocomplete="username"
-                            class="block flex-1 border-0 rounded-md bg-gray-100 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                            placeholder="yourname@guenet.com">
+                <div class="flex mt-2">
+                    <div class="">
+                        <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Role</label>
+                        <div class="">
+                            <div
+                                class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                                <input disabled v-model="form.role" type="text" name="username" id="username"
+                                    autocomplete="username"
+                                    class="block flex-1 border-0 rounded-md bg-gray-100 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                    placeholder="yourname@guenet.com">
+                            </div>
+                        </div>
                     </div>
+                    <div class="ml-2">
+                        <label for="username" class="block text-sm font-medium leading-6 text-gray-900">New Role</label>
+                        <div class="">
+                            <div
+                                class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                                <input disabled v-model="selected" type="text" name="username" id="username"
+                                    autocomplete="username"
+                                    class="block flex-1 border-0 rounded-md bg-gray-100 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                    placeholder="select new role">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>Selected: {{ selected }}</div>
+
+                    <select v-model="selected">
+                        <option disabled value="">Please select one</option>
+
+                        <option v-for="(item, index) in roles" :value="item.role">
+                            <p class="font-bold">{{ item.role }} </p> : {{
+            item.description }}
+                        </option>
+
+                    </select>
                 </div>
             </div>
 

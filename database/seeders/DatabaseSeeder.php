@@ -176,31 +176,15 @@ class DatabaseSeeder extends Seeder
                 'id' => '7BFD0B8F-46E5-8E6B-1522-F7DDC2A589DE',
                 'role' => 'supervisor',
                 'name' => 'Approval Role User Management',
-                'category' => '1',
-                'description' => 'can approve user assignment and performance check for specisif company',
-
-            ],
-            [
-                'id' => 'C63B8D84-9D6C-8298-43D6-FE67C96E0059',
-                'role' => 'manager',
-                'name' => 'Manager',
-                'category' => '1',
-                'description' => 'can check all performance for specific company',
-
-            ],
-            [
-                'id' => '6CE8BCBA-7030-360A-7C19-8709C47179E6',
-                'role' => 'superuser',
-                'name' => 'Super User',
                 'category' => '2',
-                'description' => 'can access all feature in apps and all user ',
+                'description' => 'can approve user assignment and performance check for specisif company',
 
             ],
             [
                 'id' => 'C9E11B93-7CEE-3C3F-175E-AC6476CA34E0',
                 'role' => 'display',
                 'name' => 'Dashboard Display',
-                'category' => '1',
+                'category' => '3',
                 'description' => 'only display queue for specific company ',
 
             ],
@@ -208,7 +192,7 @@ class DatabaseSeeder extends Seeder
                 'id' => 'A99E3B4D-54FD-6E51-5A2F-4ED7F06F6582',
                 'role' => 'counter',
                 'name' => 'Counter Number',
-                'category' => '2',
+                'category' => '4',
                 'description' => 'only display queue for specific company ',
 
             ],
@@ -216,18 +200,36 @@ class DatabaseSeeder extends Seeder
                 'id' => 'C4C472FE-4A3E-8D7C-326D-2779C0170F38',
                 'role' => 'display&counter',
                 'name' => 'Display & Counter',
-                'category' => '1',
+                'category' => '5',
                 'description' => 'only display queue for specific company ',
+
+            ],
+            [
+                'id' => 'C63B8D84-9D6C-8298-43D6-FE67C96E0059',
+                'role' => 'manager',
+                'name' => 'Manager',
+                'category' => '6',
+                'description' => 'can check all performance for specific company',
 
             ],
             [
                 'id' => 'C28CF263-20A5-32E7-379A-B7561DE267FB',
                 'role' => 'guest',
                 'name' => 'guest ',
-                'category' => '3',
+                'category' => '7',
                 'description' => 'all feature for desk trial purpose ',
 
             ],
+            [
+                'id' => '6CE8BCBA-7030-360A-7C19-8709C47179E6',
+                'role' => 'superuser',
+                'name' => 'Super User',
+                'category' => '9',
+                'description' => 'can access all feature in apps and all user ',
+
+            ],
+
+
 
         ];
 

@@ -93,6 +93,7 @@ class ProfileController extends Controller
                 ->select('users.name', 'users.email', 'users.company', 'users.active', 'roles.role',  'roles.description')
                 ->orderBy('users.active')
                 ->orderBy('users.company')
+                ->orderBy('roles.category')
                 ->orderBy('users.name')
                 ->get();
         } elseif ($accesslevel == 'c63b8d84-9d6c-8298-43d6-fe67c96e0059') {
@@ -102,6 +103,7 @@ class ProfileController extends Controller
                 ->select('users.name', 'users.email', 'users.company', 'users.active', 'roles.role',  'roles.description')
                 ->orderBy('users.active')
                 ->orderBy('users.company')
+                ->orderBy('roles.category')
                 ->orderBy('users.name')
                 ->get();
         } elseif ($accesslevel == '7bfd0b8f-46e5-8e6b-1522-f7ddc2a589de') {
@@ -113,6 +115,7 @@ class ProfileController extends Controller
 
                 ->orderBy('users.active')
                 ->orderBy('users.company')
+                ->orderBy('roles.category')
                 ->orderBy('users.name')
                 ->get();
         } else {
@@ -123,6 +126,7 @@ class ProfileController extends Controller
                 ->select('users.name', 'users.email', 'users.company', 'users.active', 'roles.role',  'roles.description')
                 ->orderBy('users.active')
                 ->orderBy('users.company')
+                ->orderBy('roles.category')
                 ->orderBy('users.name')
                 ->get();
         }

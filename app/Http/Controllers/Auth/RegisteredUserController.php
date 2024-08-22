@@ -78,9 +78,17 @@ class RegisteredUserController extends Controller
         $status = $request['status'];
         $role = $request['role'];
         $company = Auth::User()->company;
+        $newRole = $request['id'];
 
-        //  dd($name, $role, $email, $status);
+        //dd($name, $role, $email, $status);
 
+        if ($newRole == 'nonewrole') {
+
+
+            $role = $role;
+        } else {
+            $role = $newRole;
+        };
 
 
         $role = DB::table('roles')
@@ -99,5 +107,42 @@ class RegisteredUserController extends Controller
         //dd($name, $role, $email, $status);
 
         return Redirect::route('dashboard');
+    }
+
+    public function roleslist(Request $request)
+    {
+        //       dd($request['id'], $request['userName'], $request['userEmail'], Auth::user());
+        $name = $request['name'];
+        $email = $request['email'];
+        $status = $request['status'];
+        $role = Auth::user()->role;
+        $company = Auth::User()->company;
+
+
+        //  dd($name, $role, $email, $status);
+        if ($role == '6ce8bcba-7030-360a-7c19-8709c47179e6') {
+            $data = DB::table('roles')
+                ->select('role', 'description')
+                ->get();
+        } elseif ($role == '7bfd0b8f-46e5-8e6b-1522-f7ddc2a589de') {
+            $data = DB::table('roles')
+                ->where('category', '<', 2)
+                ->select('role', 'description')
+                ->get();
+        } elseif ($role == 'c63b8d84-9d6c-8298-43d6-fe67c96e0059') {
+            $data = DB::table('roles')
+                ->where('category', '<', 6)
+                ->select('role', 'description')
+                ->get();
+        } else {
+            $data = DB::table('roles')
+                ->where('category', '=', 0)
+                ->select('role', 'description')
+                ->get();
+        }
+
+
+
+        return response()->json($data);
     }
 }

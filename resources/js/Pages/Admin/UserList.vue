@@ -14,14 +14,14 @@ onMounted(() => {
 const userList = async () => {
     const responses = await axios.get("userlist");
     users.value = responses.data;
-    console.log(users)
+
 }
 
 const editUserForm = (item) => {
-    console.log('edit user')
+
     editView.value = true;
     itemUser.value = item;
-    console.log(itemUser)
+
 
 }
 

@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/userlist', [ProfileController::class, 'userlist'])->name('userlist');
     Route::post('/adduser/{id}', [RegisteredUserController::class, 'adduser']);
     Route::post('/edituser/{id}', [RegisteredUserController::class, 'edituser']);
+    Route::get('/roleslist', [RegisteredUserController::class, 'roleslist']);
 
 
     Route::get('/display', [DisplayController::class, 'display'])->name('display');
