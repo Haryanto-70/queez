@@ -446,9 +446,9 @@ function exitDesk() {
             </div>
             <div class="flex  bg-[#161649]">
                 <div class="ml-5 mt-8">
-                    <table class="border-separate border-spacing-2 border border-slate-400">
+                    <table class="border-separate border-spacing-2 border border-slate-400 bg-gray-200">
                         <thead>
-                            <tr class="text-gray-300 bg-gray-700 px-3">
+                            <tr class="text-gray-700 bg-gray-300 px-3">
                                 <th class="  text-md border border-slate-300 ">No</th>
                                 <th class="  text-md px-3 border border-slate-300">Queue Number</th>
                                 <th class="  text-md px-3 border border-slate-300">Category</th>
@@ -461,7 +461,7 @@ function exitDesk() {
                         </thead>
                         <tbody>
                             <tr v-for="(item, index) of queues"
-                                class="text-xl hover:bg-yellow-500  py-6 text-gray-300 hover:text-gray-700 ">
+                                class="text-xl hover:bg-yellow-500  py-6 text-gray-700 hover:text-gray-700 ">
                                 <th scope="row">{{ index + 1 }}.</th>
                                 <td class="text-center  px-2">{{ item.queue_no }}</td>
                                 <td class="text-center  px-2">

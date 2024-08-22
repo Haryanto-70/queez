@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DisplayController;
 use App\Http\Controllers\DeskController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -20,6 +21,15 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+Route::get('/setting', function () {
+    return Inertia::render('Admin/Management');
+})->middleware(['auth', 'verified'])->name('setting');
+
+Route::get('/performance', function () {
+    return Inertia::render('Performance/Performance');
+})->middleware(['auth', 'verified'])->name('performance');
+
 Route::get('/error', function () {
     return Inertia::render('Error/404');
 })->name('error404');
@@ -35,6 +45,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/users', [ProfileController::class, 'users'])->name('profile.users');
+
+    Route::get('/userlist', [ProfileController::class, 'userlist'])->name('userlist');
+    Route::post('/adduser/{id}', [RegisteredUserController::class, 'adduser']);
+    Route::post('/edituser/{id}', [RegisteredUserController::class, 'edituser']);
+
 
     Route::get('/display', [DisplayController::class, 'display'])->name('display');
     Route::get('/dsiplay/queue', [DisplayController::class, 'displayqueue'])->name('display.queue');

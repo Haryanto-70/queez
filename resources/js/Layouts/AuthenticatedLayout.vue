@@ -39,13 +39,13 @@ const showingNavigationDropdown = ref(false);
                                 </NavLink>
                             </div>
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :href="route('dashboard')" :active="route().current('performance')">
+                                <NavLink :href="route('performance')" :active="route().current('performance')">
                                     <p class="text-gray-200">Performance</p>
                                 </NavLink>
                             </div>
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :href="route('dashboard')" :active="route().current('user')">
-                                    <p class="text-gray-200">User Management</p>
+                                <NavLink :href="route('setting')" :active="route().current('setting')">
+                                    <p class="text-gray-200">Setting</p>
                                 </NavLink>
                             </div>
                         </div>
