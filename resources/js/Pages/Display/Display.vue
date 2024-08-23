@@ -10,13 +10,22 @@ const header = ref("Hallo");
 const header2 = ref("Hallo-2");
 const count = ref(0);
 const queues = ref([]);
+const dashboard = ref([]);
+const logo = ref('/images/logo-puskesmas.png');
+const advs1 = ref();
+const advs2 = ref();
+const advs3 = ref();
+const advs4 = ref();
+const advs5 = ref();
+const advs6 = ref();
+const advs7 = ref();
 const datas = ref([]);
 const time = ref();
 const callReady = ref(true);
 const callQueueNo = ref("-911");
 const callDeskNo = ref(5);
 const callQUuid = ref("AXAX");
-const namapt = ref("PUSEKSMAS CIBANGKONG BANDUNG");
+const namapt = ref("PUSKESMAS CIBANGKONG BANDUNG");
 const inCounter1 = ref("C001");
 const inCounter2 = ref("A002");
 const inCounter3 = ref("A003");
@@ -57,10 +66,30 @@ let soundQueNo = new Audio("audio/queue/queueno.wav");
 let soundAtCounter = new Audio("audio/queue/di-counter.wav");
 const toggle = ref(true);
 
+
+
 onMounted(() => {
     getResponse();
+    getDashboard();
 
 });
+
+const getDashboard = async () => {
+    try {
+        const responses = await axios.get("display/dashboard");
+        dashboard.value = responses.data[0];
+        console.log('dashbaord', dashboard, dashboard.value.company_logo)
+        namapt.value = dashboard.value.dashboard_name
+        logo.value = "/images/" + dashboard.value.company_logo;
+        advs1.value = "/images/advs/" + dashboard.value.image_1;
+        advs2.value = "/images/advs/" + dashboard.value.image_2;
+        advs3.value = "/images/advs/" + dashboard.value.image_3;
+        advs4.value = "/images/advs/" + dashboard.value.image_4;
+
+    } catch (error) {
+        header.value = "ERROR READ DATABASE";
+    }
+}
 
 const getResponse = async () => {
     try {
@@ -75,12 +104,12 @@ const getResponse = async () => {
         callQueueNo.value = queues.value.callQNumber;
         callDeskNo.value = queues.value.callDeskNumber;
         callQUuid.value = queues.value.quuid;
-        console.log(
-            "interval getQueue",
-            callQueueNo.value,
-            callDeskNo.value,
-            callQUuid.value
-        );
+        // console.log(
+        //     "interval getQueue",
+        //     callQueueNo.value,
+        //     callDeskNo.value,
+        //     callQUuid.value
+        // );
         callQueue();
         count.value = count.value + 1;
     } catch (error) {
@@ -160,7 +189,7 @@ const callNext = async (qUuid) => {
         const responses = await axios.put("queue/next/" + qUuid);
         callDeskNo.value = 0;
         callQueueNo.value = "----";
-        console.log(responses.data);
+        // console.log(responses.data);
 
 
         callReady.value = true;
@@ -178,16 +207,16 @@ function callQueue() {
     const char4 = queue[3];
     const deskNo = callDeskNo.value;
     const qUuid = callQUuid.value;
-    console.log("call queue");
+    // console.log("call queue");
     if (char1 == "-") {
-        console.log("no call");
-        console.log("wait for calling");
+        // console.log("no call");
+        // console.log("wait for calling");
         return;
     }
 
     if (!callReady.value) {
-        console.log("calling sound");
-        console.log("wait for calling");
+        // console.log("calling sound");
+        // console.log("wait for calling");
         return;
     }
 
@@ -384,7 +413,7 @@ function callQueue() {
     callSound8.load();
     callSound9.load();
 
-    console.log("Call Ready Status", callReady.value);
+    // console.log("Call Ready Status", callReady.value);
 
 
 
@@ -431,7 +460,7 @@ function callQueue() {
         <div class="flex flex-col">
             <div class="flex flex-row justify-between px-5 my-2">
                 <div class="flex flex-row items-center">
-                    <img src="/images/logo-puskesmas.png" width="100px" alt="" />
+                    <img :src="logo" width="100px" alt="" />
                     <div>
                         <p class="text-cool-gray-800 text-2xl font-bold font-changa">
                             {{ namapt }}
@@ -445,14 +474,10 @@ function callQueue() {
         </div>
         <div class="flex flex-row">
             <div class="">
-                <img v-if="active1" src="images/advs/advs1.png" alt="advertising" style="width: 5400px; height: 650px"
-                    srcset="" />
-                <img v-if="active2" src="images/advs/advs2.png" alt="advertising" style="width: 5400px; height: 650px"
-                    srcset="" />
-                <img v-if="active3" src="images/advs/advs3.png" alt="advertising" style="width: 5400px; height: 650px"
-                    srcset="" />
-                <img v-if="active4" src="images/advs/advs4.png" alt="advertising" style="width: 5400px; height: 650px"
-                    srcset="" />
+                <img v-if="active1" :src="advs1" alt="advertising" style="width: 5400px; height: 650px" srcset="" />
+                <img v-if="active2" :src="advs2" alt="advertising" style="width: 5400px; height: 650px" srcset="" />
+                <img v-if="active3" :src="advs3" alt="advertising" style="width: 5400px; height: 650px" srcset="" />
+                <img v-if="active4" :src="advs4" alt="advertising" style="width: 5400px; height: 650px" srcset="" />
             </div>
             <div class="w-full flex flex-col h-full mx-1">
                 <div class="h-1/2">
@@ -505,7 +530,7 @@ function callQueue() {
         <div v-if="toggle"
             class="fixed top-1/2 left-1/3 bg-slate-800 p-5 rounded-md border-light-100 border-2 shadow-yellow-500 hover:bg-red-500">
             <div @click="toggle = !toggle" class="text-white">
-                <h1>OPEN QUEUEING DSIPLAY CONFIRMED ?</h1>
+                <h1>OPEN QUEUEING DISPLAY CONFIRMED ?</h1>
                 <h1>Click here !!</h1>
             </div>
         </div>

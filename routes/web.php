@@ -54,6 +54,14 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/display', [DisplayController::class, 'display'])->name('display');
     Route::get('/dsiplay/queue', [DisplayController::class, 'displayqueue'])->name('display.queue');
+    Route::get('/display/dashboard', [DisplayController::class, 'dashboard'])->name('display.dashboard');
+    Route::get('/display/dispencer', [DisplayController::class, 'dispencer'])->name('display.dispencer');
+    Route::get('/dispenser', [DisplayController::class, 'dispenser'])->name('dispenser');
+    Route::get('/dispencers', [DisplayController::class, 'dispencers'])->name('dispencers');
+
+    Route::put('/queue/{sId}', [DisplayController::class, 'queue'])->name('queue');
+    Route::put('/queue/next/{qId}', [DisplayController::class, 'callnext'])->name('callnext');
+
 
     Route::get('/desk/{dNo}', [DeskController::class, 'desk'])->name('desk');
     Route::get('/userdesk', [DeskController::class, 'userdesk'])->name('userdesk');
@@ -64,15 +72,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/userdesk/exitdesk', [DeskController::class, 'exitdesk'])->name('exitdesk');
     Route::put('/userdesk/quecancel/{qNo}', [DeskController::class, 'quecancel'])->name('quecancel');
     Route::put('/userdesk/questart/{qNo}', [DeskController::class, 'startqueue'])->name('startqueue');
-
-
-
-    Route::get('/dispenser', [DisplayController::class, 'dispenser'])->name('dispenser');
-    Route::get('/dispencers', [DisplayController::class, 'dispencers'])->name('dispencers');
-
-    Route::put('/queue/{sId}', [DisplayController::class, 'queue'])->name('queue');
-
-    Route::put('/queue/next/{qId}', [DisplayController::class, 'callnext'])->name('callnext');
 });
 
 require __DIR__ . '/auth.php';

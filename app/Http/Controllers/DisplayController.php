@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\Dashboard;
+use App\Models\Dispencer;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -26,6 +27,83 @@ class DisplayController extends Controller
             return Inertia::render('Display/Display');
         }
         return Inertia::render('Error/401');
+    }
+
+    public function dashboard(Request $request)
+    {
+        $company = Auth::user()->company;
+
+        $data = DB::table('dashboards')
+            ->where('company', $company)
+            ->count();
+
+        //dd($data);
+
+        if ($data != 1) {
+            Dashboard::insert([['company' => $company]]);
+        };
+
+        $data = DB::table('dashboards')
+            ->where('company', $company)
+            ->limit(1)
+            ->get();
+
+
+        return response()->json($data);
+    }
+    public function dispencer(Request $request)
+    {
+        $company = Auth::user()->company;
+
+        $data = DB::table('dispencers')
+            ->where('company', $company)
+            ->count();
+
+        //dd($data);
+
+        if ($data == 0) {
+            $dispencers = [
+                [
+                    'company' => $company,
+                    'service_list' => 'layanan1',
+                    'name' => 'LAYANAN A',
+                    'detail' => 'Layanan Rawat Inap,Rawat Jalan,Bedah,UGD',
+                    'order_list' => 1,
+                ],
+                [
+                    'company' => $company,
+                    'service_list' => 'layanan2',
+                    'name' => 'LAYANAN B',
+                    'detail' => 'Layanan Laboratorium,Layanan Radiologi',
+                    'order_list' => 2,
+                ],
+                [
+                    'company' => $company,
+                    'service_list' => 'layanan3',
+                    'name' => 'LAYANAN C',
+                    'detail' => 'Layanan Rehabilitasi,Layanan Psikologi/Psikiatri',
+                    'order_list' => 3,
+                ],
+                [
+                    'company' => $company,
+                    'service_list' => 'layanan4',
+                    'name' => 'LAYANAN D',
+                    'detail' => 'Layanan Farmasi,Layanan Gizi',
+                    'order_list' => 4,
+                ],
+            ];
+            foreach ($dispencers as $dispencer) (
+                Dispencer::insert($dispencer)
+            );
+        };
+
+        $data = DB::table('dispencers')
+            ->where('company', $company)
+
+            ->get();
+
+
+        return response()->json($data);
     }
 
     public function displayqueue(Request $request)
@@ -307,7 +385,13 @@ class DisplayController extends Controller
     public function dispencers(Request $request)
     {
         $company = Auth::user()->company;
-        if ($company == 'alkemi') {
+
+
+        $count = DB::table('dispencers')
+            ->where('company', $company)
+            ->count();
+
+        if ($count == 0) {
             $company = 'trial';
         }
 
