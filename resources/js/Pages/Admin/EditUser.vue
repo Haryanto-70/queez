@@ -102,14 +102,13 @@ const roleList = async () => {
                         </div>
                     </div>
                 </div>
-                <div>
-                    <div>Selected: {{ selected }}</div>
+                <div class="mt-2">
+                    <div class="text-sm">Selected: {{ selected }}</div>
 
                     <select v-model="selected">
-                        <option disabled value="">Please select one</option>
-
-                        <option v-for="(item, index) in roles" :value="item.role">
-                            <p class="font-bold">{{ item.role }} </p> : {{
+                        <option class="text-sm" value="">Please select one</option>
+                        <option class="text-xs" v-for="(item, index) in roles" :value="item.role">
+                            <p class="font-bold text-sm">{{ item.role }} </p> : {{
             item.description }}
                         </option>
 
@@ -117,9 +116,9 @@ const roleList = async () => {
                 </div>
             </div>
 
-            <div class="sm:col-span-4">
+            <div class="sm:col-span-4 mt-2">
                 <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Status</label>
-                <div class="mt-2">
+                <div class="">
                     <div class="flex items-center">
                         <input v-model="form.status" type="checkbox" name="username" id="username">
                         <p class="ml-2">active</p>

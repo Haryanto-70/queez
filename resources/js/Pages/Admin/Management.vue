@@ -167,10 +167,10 @@ function tokenDispenser() {
 
                     <div v-if="editUserView" class="ml-4">
                         <form action="" method="post">
-                            <div class="sm:col-span-4">
+                            <div class="sm:col-span-4 mt-2">
                                 <label for="username"
                                     class="block text-sm font-medium leading-6 text-gray-900">Name</label>
-                                <div class="mt-2">
+                                <div class="">
                                     <div
                                         class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
 
@@ -181,10 +181,10 @@ function tokenDispenser() {
                                     </div>
                                 </div>
                             </div>
-                            <div class="sm:col-span-4">
+                            <div class="sm:col-span-4 mt-2">
                                 <label for="username"
                                     class="block text-sm font-medium leading-6 text-gray-900">Email</label>
-                                <div class="mt-2">
+                                <div class="">
                                     <div
                                         class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                                         <input v-model="userEmail" type="text" name="username" id="username"
@@ -194,10 +194,10 @@ function tokenDispenser() {
                                     </div>
                                 </div>
                             </div>
-                            <div class="sm:col-span-4">
+                            <div class="sm:col-span-4 mt-2">
                                 <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Access
                                     Level</label>
-                                <div class="mt-2">
+                                <div class="">
                                     <div
                                         class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                                         <input v-model="userAccessLevel" type="text" name="username" id="username"
@@ -207,10 +207,10 @@ function tokenDispenser() {
                                     </div>
                                 </div>
                             </div>
-                            <div class="sm:col-span-4">
+                            <div class="sm:col-span-4 mt-2">
                                 <label for="username"
                                     class="block text-sm font-medium leading-6 text-gray-900">Status</label>
-                                <div class="mt-2">
+                                <div class="">
                                     <div
                                         class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
 
@@ -238,29 +238,119 @@ function tokenDispenser() {
                         <h1>Dashboard</h1>
 
                     </div>
-                    <div>
-                        <div>Company Name</div>
-                        <div class="my-2">Image 1 : Name Image 1 <button
-                                class="bg-blue-700 text-gray-100 px-3 py-2 rounded-md">replace</button>
+                    <div class="ml-8">
+                        <div class="sm:col-span-4 mt-2 flex items-center">
+                            <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Company
+                                Name</label>
+                            <div class="ml-4">
+                                <div
+                                    class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+
+                                    <input type="text" name="username" id="username" autocomplete="username"
+                                        class="block flex-1 border-0 rounded-md bg-gray-100 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                        placeholder="Company Name">
+                                </div>
+                            </div>
                         </div>
-                        <div class="my-2">Image 2 <button
-                                class="bg-blue-700 text-gray-100 px-3 py-2 rounded-md">replace</button>
+                        <div class="sm:col-span-4 mt-2 flex items-center">
+                            <label for="username" class="block text-sm font-medium leading-6 text-gray-900 w-24">Image 1
+                            </label>
+                            <div class="ml-4">
+                                <div
+                                    class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+
+                                    <input type="text" name="username" id="username" autocomplete="username"
+                                        class="block flex-1 border-0 rounded-md bg-gray-100 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                        placeholder="Image 1">
+                                </div>
+                            </div>
+                            <button class="bg-blue-700 text-gray-100 px-3 py-2 rounded-md ml-2">replace</button>
                         </div>
-                        <div class="my-2">Image 3 <button
-                                class="bg-blue-700 text-gray-100 px-3 py-2 rounded-md">replace</button>
+                        <div class="sm:col-span-4 mt-2 flex items-center">
+                            <label for="username" class="block text-sm font-medium leading-6 text-gray-900 w-24">Image 2
+                            </label>
+                            <div class="ml-4">
+                                <div
+                                    class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+
+                                    <input type="text" name="username" id="username" autocomplete="username"
+                                        class="block flex-1 border-0 rounded-md bg-gray-100 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                        placeholder="Image 2">
+                                </div>
+                            </div>
+                            <button class="bg-blue-700 text-gray-100 px-3 py-2 rounded-md ml-2">replace</button>
                         </div>
-                        <div class="my-2">Image 4 <button
-                                class="bg-blue-700 text-gray-100 px-3 py-2 rounded-md">replace</button>
+                        <div class="sm:col-span-4 mt-2 flex items-center">
+                            <label for="username" class="block text-sm font-medium leading-6 text-gray-900 w-24">Image 3
+                            </label>
+                            <div class="ml-4">
+                                <div
+                                    class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+
+                                    <input type="text" name="username" id="username" autocomplete="username"
+                                        class="block flex-1 border-0 rounded-md bg-gray-100 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                        placeholder="Image 3">
+                                </div>
+                            </div>
+                            <button class="bg-blue-700 text-gray-100 px-3 py-2 rounded-md ml-2">replace</button>
                         </div>
-                        <div class="my-2">Image 5 <button
-                                class="bg-blue-700 text-gray-100 px-3 py-2 rounded-md">replace</button>
+                        <div class="sm:col-span-4 mt-2 flex items-center">
+                            <label for="username" class="block text-sm font-medium leading-6 text-gray-900 w-24">Image 4
+                            </label>
+                            <div class="ml-4">
+                                <div
+                                    class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+
+                                    <input type="text" name="username" id="username" autocomplete="username"
+                                        class="block flex-1 border-0 rounded-md bg-gray-100 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                        placeholder="Image 4">
+                                </div>
+                            </div>
+                            <button class="bg-blue-700 text-gray-100 px-3 py-2 rounded-md ml-2">replace</button>
                         </div>
-                        <div class="my-2">Image 6 <button
-                                class="bg-blue-700 text-gray-100 px-3 py-2 rounded-md">replace</button>
+                        <div class="sm:col-span-4 mt-2 flex items-center">
+                            <label for="username" class="block text-sm font-medium leading-6 text-gray-900 w-24">Image 5
+                            </label>
+                            <div class="ml-4">
+                                <div
+                                    class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+
+                                    <input type="text" name="username" id="username" autocomplete="username"
+                                        class="block flex-1 border-0 rounded-md bg-gray-100 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                        placeholder="Image 5">
+                                </div>
+                            </div>
+                            <button class="bg-blue-700 text-gray-100 px-3 py-2 rounded-md ml-2">replace</button>
                         </div>
-                        <div class="my-2">Image 7 <button
-                                class="bg-blue-700 text-gray-100 px-3 py-2 rounded-md">replace</button>
+                        <div class="sm:col-span-4 mt-2 flex items-center">
+                            <label for="username" class="block text-sm font-medium leading-6 text-gray-900 w-24">Image 6
+                            </label>
+                            <div class="ml-4">
+                                <div
+                                    class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+
+                                    <input type="text" name="username" id="username" autocomplete="username"
+                                        class="block flex-1 border-0 rounded-md bg-gray-100 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                        placeholder="Image 6">
+                                </div>
+                            </div>
+                            <button class="bg-blue-700 text-gray-100 px-3 py-2 rounded-md ml-2">replace</button>
                         </div>
+                        <div class="sm:col-span-4 mt-2 flex items-center">
+                            <label for="username" class="block text-sm font-medium leading-6 text-gray-900 w-24">Image 7
+                            </label>
+                            <div class="ml-4">
+                                <div
+                                    class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+
+                                    <input type="text" name="username" id="username" autocomplete="username"
+                                        class="block flex-1 border-0 rounded-md bg-gray-100 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                        placeholder="Image 7">
+                                </div>
+                            </div>
+                            <button class="bg-blue-700 text-gray-100 px-3 py-2 rounded-md ml-2">replace</button>
+                        </div>
+
 
                     </div>
                 </div>
@@ -269,22 +359,114 @@ function tokenDispenser() {
                         <h1>Ticket Dispencer</h1>
 
                     </div>
-                    <div>
+                    <div class="ml-8">
                         <div>
-                            <div>Service 1</div>
-                            <div>Service Detail</div>
+                            <div class="sm:col-span-4 mt-2 flex items-center">
+                                <label for="username"
+                                    class="block text-sm font-medium leading-6 text-gray-900 w-24">Service 1
+                                </label>
+                                <div class="ml-4">
+                                    <div
+                                        class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+
+                                        <input type="text" name="username" id="username" autocomplete="username"
+                                            class="block flex-1 border-0 rounded-md bg-gray-100 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                            placeholder="Service 1">
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <div
+                                        class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+
+                                        <input type="text" name="username" id="username" autocomplete="username"
+                                            class="block flex-1 border-0 rounded-md bg-gray-100 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                            placeholder="Detail Service 1">
+                                    </div>
+                                </div>
+                                <button class="bg-blue-700 text-gray-100 px-3 py-2 rounded-md ml-2">replace</button>
+                            </div>
+
                         </div>
                         <div>
-                            <div>Service 2</div>
-                            <div>Service Detail</div>
+                            <div class="sm:col-span-4 mt-2 flex items-center">
+                                <label for="username"
+                                    class="block text-sm font-medium leading-6 text-gray-900 w-24">Service 1
+                                </label>
+                                <div class="ml-4">
+                                    <div
+                                        class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+
+                                        <input type="text" name="username" id="username" autocomplete="username"
+                                            class="block flex-1 border-0 rounded-md bg-gray-100 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                            placeholder="Service 1">
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <div
+                                        class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+
+                                        <input type="text" name="username" id="username" autocomplete="username"
+                                            class="block flex-1 border-0 rounded-md bg-gray-100 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                            placeholder="Detail Service 2">
+                                    </div>
+                                </div>
+                                <button class="bg-blue-700 text-gray-100 px-3 py-2 rounded-md ml-2">replace</button>
+                            </div>
+
                         </div>
                         <div>
-                            <div>Service 3</div>
-                            <div>Service Detail</div>
+                            <div class="sm:col-span-4 mt-2 flex items-center">
+                                <label for="username"
+                                    class="block text-sm font-medium leading-6 text-gray-900 w-24">Service 1
+                                </label>
+                                <div class="ml-4">
+                                    <div
+                                        class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+
+                                        <input type="text" name="username" id="username" autocomplete="username"
+                                            class="block flex-1 border-0 rounded-md bg-gray-100 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                            placeholder="Service 1">
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <div
+                                        class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+
+                                        <input type="text" name="username" id="username" autocomplete="username"
+                                            class="block flex-1 border-0 rounded-md bg-gray-100 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                            placeholder="Detail Service 3">
+                                    </div>
+                                </div>
+                                <button class="bg-blue-700 text-gray-100 px-3 py-2 rounded-md ml-2">replace</button>
+                            </div>
+
                         </div>
                         <div>
-                            <div>Service 4</div>
-                            <div>Service Detail</div>
+                            <div class="sm:col-span-4 mt-2 flex items-center">
+                                <label for="username"
+                                    class="block text-sm font-medium leading-6 text-gray-900 w-24">Service 1
+                                </label>
+                                <div class="ml-4">
+                                    <div
+                                        class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+
+                                        <input type="text" name="username" id="username" autocomplete="username"
+                                            class="block flex-1 border-0 rounded-md bg-gray-100 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                            placeholder="Service 1">
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <div
+                                        class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+
+                                        <input type="text" name="username" id="username" autocomplete="username"
+                                            class="block flex-1 border-0 rounded-md bg-gray-100 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                            placeholder="Detail Service 4">
+                                    </div>
+                                </div>
+                                <button class="bg-blue-700 text-gray-100 px-3 py-2 rounded-md ml-2">replace</button>
+                            </div>
+
                         </div>
                     </div>
                 </div>
